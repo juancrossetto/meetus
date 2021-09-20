@@ -11,7 +11,7 @@ const TriviaPage: FC<TriviaPageProps> = () => {
   return (
     <Layout>
       <AspectRatio ratio={16 / 10} allowFullScreen>
-        <iframe src="https://trivia-semi2.herokuapp.com/" onLoad={() => setIsLoading(false)} />
+        <iframe title="trivia-frame" src="https://trivia-semi2.herokuapp.com/" onLoad={() => setIsLoading(false)} />
       </AspectRatio>
       {isLoading && <Spinner />}
     </Layout>

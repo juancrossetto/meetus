@@ -10,7 +10,7 @@ const RoomsPage: FC<RoomsPageProps> = () => {
   return (
     <Layout>
       <AspectRatio ratio={16 / 8}>
-        <iframe src="https://meetus-rooms.netlify.app/" onLoad={() => setIsLoading(false)} />
+        <iframe title="rooms-frame" src="https://meetus-rooms.netlify.app/" onLoad={() => setIsLoading(false)} />
       </AspectRatio>
       {isLoading && <Spinner />}
     </Layout>

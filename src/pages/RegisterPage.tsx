@@ -1,17 +1,4 @@
-import {
-  Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
-  Button,
-  Heading,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Flex, Box, FormControl, FormLabel, Input, Stack, Link, Button, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import { MdArrowBack } from 'react-icons/md';
 import { useHistory } from 'react-router';
 

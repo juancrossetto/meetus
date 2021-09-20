@@ -14,9 +14,7 @@ import {
   useBreakpointValue,
   IconProps,
   Icon,
-  useColorModeValue,
   Checkbox,
-  Link,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import Accenture from '../assets/companies/accenture.png';

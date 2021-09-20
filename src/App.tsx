@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-import Layout from './components/Layout';
 import SettingsPage from './pages/SettingsPage';
 import DailyQuestionPage from './pages/DailyQuestionPage';
 import HomePage from './pages/HomePage';

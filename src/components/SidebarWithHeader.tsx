@@ -21,7 +21,6 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Button,
   useColorMode,
   Badge,
 } from '@chakra-ui/react';
