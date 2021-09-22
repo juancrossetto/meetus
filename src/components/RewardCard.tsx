@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
-import { Flex, Circle, Box, Image, Badge, useColorModeValue, Icon, chakra, Tooltip } from '@chakra-ui/react';
-import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
-import { FiShoppingCart } from 'react-icons/fi';
+import { Flex, Box, Image, Badge, useColorModeValue } from '@chakra-ui/react';
 import formatNumber from '../utils/formatNumber';
 const data = {
   isNew: true,

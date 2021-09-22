@@ -24,7 +24,7 @@ import {
   useColorMode,
   Badge,
 } from '@chakra-ui/react';
-import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu, FiBell, FiChevronDown, FiGift } from 'react-icons/fi';
+import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiBell, FiChevronDown, FiGift } from 'react-icons/fi';
 import { FaQuestion } from 'react-icons/fa';
 import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';

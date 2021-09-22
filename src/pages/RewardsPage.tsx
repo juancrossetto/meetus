@@ -51,6 +51,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
 
   useEffect(() => {
     setProductsFiltered(products.filter((p) => p.points >= points && p.name.toLowerCase().includes(filter.toLowerCase())));
+    // eslint-disable-next-line
   }, [debouncedFilter, debouncedPoints]);
 
   return (

@@ -179,7 +179,7 @@ export const products: Product[] = [
     description:
       'Diseño sin bordes, menos marco, escenas más amplias. Bases delgadas y refinadas, transmiten liviandad. Pixel Precise Ultra HD, movimiento fluido y profundidad visible. Compatible con HDR10+. Dolby Vision y Dolby Atmos, para imagen y sonido cinematográfico. SAPHI, la forma más inteligente de disfrutar de tu televisor.  Acceso con un solo botón a un menú de íconos sencillos| Bluetooth para que puedas conectar tus dispositivos compatibles. Colección Philips TV: Netflix, Prime Video y mucho más. Sonido nítido de parlantes de rango completo. Graves potentes.',
     stock: 100,
-    madeIn: "Argentina",
+    madeIn: 'Argentina',
     points: 3683000,
     images: [
       {
@@ -195,7 +195,7 @@ export const products: Product[] = [
     description:
       'Apertura asistida ultrarrápida con tecnología Nitro Piston. Fácil apertura en un solo paso. Tamaño de pliegue compacto y ligero para almacenamiento y transporte. Cuenta con Top-Lok Technology, un sistema patentado de fijación de bolsa a carrito.',
     stock: 50,
-    madeIn: "Korea",
+    madeIn: 'Korea',
     points: 1847000,
     images: [
       {
@@ -208,7 +208,7 @@ export const products: Product[] = [
     description:
       '3 deliciosos cafés de grano recién molido, más fácil que nunca. Espuma de leche suave y sedosa gracias al sistema LatteGo de alta velocidad. Ajuste de intensidad del aroma y de la cantidad mediante la opción de "mi elección café". Pantalla táctil, fácil e intuitiva. Niveles de molinillo de 12 pasos para ajustar fácilmente según el gusto. Gracias al sello de aroma se mantienen los granos frescos por más tiempo. Disfrute de tazas del café más fino gracias a los duraderos molinillos de cerámica. Temperatura, aroma y crema perfectos una taza tras otra. Fácil de limpiar gracias al sistema de preparación completamente extraíble. LatteGo con fácil limpieza.. Piezas aptas para lavavajillas y para una mayor comodidad',
     stock: 200,
-    madeIn: "China",
+    madeIn: 'China',
     points: 3541000,
     images: [
       {
@@ -230,7 +230,7 @@ export const products: Product[] = [
   },
 ];
 
-const vouchers: Voucher[] = [
+export const vouchers: Voucher[] = [
   {
     name: 'Ahorro en supermercados vea.com.ar',
     description:
