@@ -10,7 +10,7 @@ const TriviaPage: FC<TriviaPageProps> = () => {
 
   return (
     <Layout>
-      <AspectRatio ratio={16 / 8}>
+      <AspectRatio ratio={16 / 8} minH={'450px'}>
         <iframe
           title="trivia-frame"
           src="https://trivia-semi2.herokuapp.com/"

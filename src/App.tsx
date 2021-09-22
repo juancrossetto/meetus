@@ -7,11 +7,13 @@ import LoginPage from './pages/LoginPage';
 import RoomsPage from './pages/RoomsPage';
 import TriviaPage from './pages/TriviaPage';
 import RegisterPage from './pages/RegisterPage';
+import RewardsPage from './pages/RewardsPage';
 
 function App() {
   return (
     <Switch>
       <Route exact component={SettingsPage} path="/settings" />
+      <Route exact component={RewardsPage} path="/rewards" />
       <Route exact component={DailyQuestionPage} path="/daily-question" />
       <Route exact component={TriviaPage} path="/trivia" />
       <Route exact component={RoomsPage} path="/rooms" />

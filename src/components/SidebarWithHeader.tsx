@@ -24,7 +24,9 @@ import {
   useColorMode,
   Badge,
 } from '@chakra-ui/react';
-import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu, FiBell, FiChevronDown } from 'react-icons/fi';
+import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu, FiBell, FiChevronDown, FiGift } from 'react-icons/fi';
+import { FaQuestion } from 'react-icons/fa';
+import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { useHistory } from 'react-router';
@@ -37,8 +39,9 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Inicio', icon: FiHome, url: '/' },
   { name: 'Trivia', icon: FiTrendingUp, url: '/trivia' },
-  { name: 'Charlemos', icon: FiCompass, url: '/rooms' },
-  { name: 'Pregunta Diaria', icon: FiStar, url: '/daily-question' },
+  { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
+  { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
+  { name: 'Canjear Puntos', icon: FiGift, url: '/rewards' },
   { name: 'Configuración', icon: FiSettings, url: '/settings' },
 ];
 
@@ -87,7 +90,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" _hover={{ cursor: 'pointer' }} onClick={() => push('/')}>
           MeetUs
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
@@ -191,7 +194,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>
                 Puntos
                 <Badge colorScheme="green" fontSize="0.8em" ml={3}>
-                  1.493,00
+                  300.000
                 </Badge>
               </MenuItem>
               <MenuDivider />
