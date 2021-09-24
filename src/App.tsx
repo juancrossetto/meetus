@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import SettingsPage from './pages/SettingsPage';
 import DailyQuestionPage from './pages/DailyQuestionPage';
 import HomePage from './pages/HomePage';
@@ -8,19 +8,20 @@ import RoomsPage from './pages/RoomsPage';
 import TriviaPage from './pages/TriviaPage';
 import RegisterPage from './pages/RegisterPage';
 import RewardsPage from './pages/RewardsPage';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <Switch>
-      <Route exact component={SettingsPage} path="/settings" />
-      <Route exact component={RewardsPage} path="/rewards" />
-      <Route exact component={DailyQuestionPage} path="/daily-question" />
-      <Route exact component={TriviaPage} path="/trivia" />
-      <Route exact component={RoomsPage} path="/rooms" />
+      <PrivateRoute component={SettingsPage} path="/settings" />
+      <PrivateRoute component={RewardsPage} path="/rewards" />
+      <PrivateRoute component={DailyQuestionPage} path="/daily-question" />
+      <PrivateRoute component={TriviaPage} path="/trivia" />
+      <PrivateRoute component={RoomsPage} path="/rooms" />
       <Route exact component={RegisterPage} path="/register" />
       <Route exact component={LoginPage} path="/login" />
-      <Route exact component={HomePage} path="/" />
-      <Redirect to="/" />
+      <PrivateRoute component={HomePage} path="/" />
+      {/* <Redirect exact to="/" /> */}
     </Switch>
   );
 }

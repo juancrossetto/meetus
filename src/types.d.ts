@@ -20,3 +20,35 @@ interface Voucher {
   points: number;
   savingPercentage?: number;
 }
+
+interface Message {
+  msg: string;
+  category: string;
+}
+
+interface User {
+  name?: string;
+  surName?: string;
+  dni?: string;
+  email?: string;
+  password?: string;
+  address?: string;
+  city?: string;
+  country?: string;
+  phoneNumber?: string;
+  image?: string;
+  points: number;
+}
+
+interface Address {
+  street: string;
+  number: string;
+  floor?: string | null;
+  city: string;
+  country: string;
+}
+
+interface Account {
+  email: string;
+  password: string;
+}

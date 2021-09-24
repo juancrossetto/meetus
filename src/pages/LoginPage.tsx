@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -16,6 +16,7 @@ import {
   Icon,
   Checkbox,
 } from '@chakra-ui/react';
+import { AuthContext } from '../context/Auth';
 import { useHistory } from 'react-router';
 import Accenture from '../assets/companies/accenture.png';
 import Meli from '../assets/companies/meli.png';
@@ -24,6 +25,7 @@ import Globant from '../assets/companies/globant.png';
 import Despegar from '../assets/companies/despegar.png';
 import BackgroundLogin from '../assets/login-background.jpg';
 import toast, { Toaster } from 'react-hot-toast';
+import Spinner from '../components/Spinner';
 
 const enterprises = [
   {
@@ -49,29 +51,45 @@ const enterprises = [
 ];
 
 const DEFAULT_EMAIL = 'juan@gmail.com';
-const DEFAULT_PASS = '123';
+const DEFAULT_PASS = '123456';
 export default function LoginPage() {
-  const { push } = useHistory();
-  const [email, setEmail] = useState(DEFAULT_EMAIL);
-  const [password, setPassword] = useState(DEFAULT_PASS);
+  const { push, goBack, location } = useHistory();
+  const { message, authenticated, login, loading } = useContext(AuthContext);
+  const [account, setAccount] = useState<User>({
+    email: DEFAULT_EMAIL,
+    password: DEFAULT_PASS,
+    points: 0,
+  });
+  const { email, password } = account;
 
   const handleLogin = () => {
-    console.log('email', email);
-    console.log('password', password);
-    if (email === DEFAULT_EMAIL && password === DEFAULT_PASS) {
-      push('/');
-      toast.success('Bienvenido Juan');
-    } else {
-      toast('Error al ingresar credenciales', {
-        icon: '😔',
-        style: {
-          borderRadius: '10px',
-          background: '#f2657a',
-          color: '#fff',
-        },
-      });
-    }
+    login(account);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAccount({
+      ...account,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    if (authenticated) {
+      if (location.pathname !== '/login') {
+        goBack();
+      } else {
+        push('/');
+      }
+    }
+    // eslint-disable-next-line
+  }, [authenticated]);
+
+  useEffect(() => {
+    if (message) {
+      toast(message.msg);
+    }
+  }, [message]);
+
   return (
     <Box
       id="main-box"
@@ -93,7 +111,6 @@ export default function LoginPage() {
         columns={{ base: 1, md: 2 }}
         spacing={{ base: 10, lg: 32 }}
         py={{ base: 10, sm: 20, lg: 32 }}
-        // bg={useColorModeValue('#ffffff99', '#00000099')}
         borderRadius="xl"
       >
         <Stack spacing={{ base: 10, md: 20 }}>
@@ -177,6 +194,7 @@ export default function LoginPage() {
           <Box as={'form'} mt={10}>
             <Stack spacing={4}>
               <Input
+                name="email"
                 placeholder="Email Corporativo"
                 bg={'gray.100'}
                 border={0}
@@ -184,10 +202,11 @@ export default function LoginPage() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
                 value={email}
               />
               <Input
+                name="password"
                 placeholder="Contraseña"
                 bg={'gray.100'}
                 border={0}
@@ -195,12 +214,11 @@ export default function LoginPage() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
                 value={password}
               />
               <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
                 <Checkbox>Recordarme</Checkbox>
-                {/* <Link color={'blue.400'}>Forgot password?</Link> */}
               </Stack>
               <Button fontFamily={'heading'} bg={'gray.200'} color={'gray.800'} onClick={() => push('/register')}>
                 Registrarse
@@ -236,6 +254,7 @@ export default function LoginPage() {
           'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
         }
       /> */}
+      {loading && <Spinner />}
     </Box>
   );
 }

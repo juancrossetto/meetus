@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AuthProvider from './context/Auth';
 
 const colors = {
   brand: {
@@ -17,11 +18,13 @@ const theme = extendTheme({ colors });
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
-    </BrowserRouter>
+    <AuthProvider>
+      <Router>
+        <ChakraProvider theme={theme}>
+          <App />
+        </ChakraProvider>
+      </Router>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

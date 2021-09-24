@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactText } from 'react';
+import React, { ReactNode, ReactText, useContext, useEffect } from 'react';
 import {
   IconButton,
   Avatar,
@@ -24,12 +24,17 @@ import {
   useColorMode,
   Badge,
 } from '@chakra-ui/react';
-import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiBell, FiChevronDown, FiGift } from 'react-icons/fi';
+import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiChevronDown, FiGift } from 'react-icons/fi';
 import { FaQuestion } from 'react-icons/fa';
 import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { useHistory } from 'react-router';
+import { AuthContext } from '../context/Auth';
+import Spinner from './Spinner';
+import toast, { Toaster } from 'react-hot-toast';
+import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter';
+import formatNumber from '../utils/formatNumber';
 
 interface LinkItemProps {
   name: string;
@@ -46,7 +51,13 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function SidebarWithHeader({ children }: { children?: ReactNode }) {
+  const { closeSession, loading, message, authenticated, user } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    if (message) {
+      toast(message.msg);
+    }
+  }, [message]);
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -64,10 +75,11 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} closeSession={closeSession} user={user} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
+      {(loading || authenticated === null) && <Spinner />}
     </Box>
   );
 }
@@ -142,10 +154,17 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
+  closeSession: () => void;
+  user?: User | null;
 }
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+const MobileNav = ({ onOpen, closeSession, user, ...rest }: MobileProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { push } = useHistory();
+
+  const handleCloseSession = () => {
+    closeSession();
+    push('/login');
+  };
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -165,7 +184,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
+        {/* <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} /> */}
         <IconButton
           size="lg"
           variant="ghost"
@@ -177,11 +196,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack>
-                <Avatar size={'sm'} src={'https://bit.ly/ryan-florence'} />
+                <Avatar size={'md'} src={user?.image} />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontSize="sm">Juanma Vazquez</Text>
+                  <Text fontSize="sm">
+                    {user ? `${capitalizeFirstLetter(user.name || '')} ${capitalizeFirstLetter(user.surName || '')}` : '-'}
+                  </Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {user?.email}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -189,20 +210,21 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 </Box>
               </HStack>
             </MenuButton>
-            <MenuList bg={useColorModeValue('white', 'gray.900')} borderColor={useColorModeValue('gray.200', 'gray.700')}>
+            <MenuList bg={useColorModeValue('white', 'gray.900')} borderColor={useColorModeValue('gray.200', 'gray.700')} zIndex="99">
               <MenuItem onClick={() => push('/settings')}>Perfil</MenuItem>
               <MenuItem>
                 Puntos
                 <Badge colorScheme="green" fontSize="0.8em" ml={3}>
-                  300.000
+                  {formatNumber(user && user.points ? user.points.toString() : '0')}
                 </Badge>
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={() => push('/login')}>Cerrar Sesión</MenuItem>
+              <MenuItem onClick={() => handleCloseSession()}>Cerrar Sesión</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
       </HStack>
+      <Toaster />
     </Flex>
   );
 };
