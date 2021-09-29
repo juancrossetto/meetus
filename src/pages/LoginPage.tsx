@@ -15,6 +15,7 @@ import {
   IconProps,
   Icon,
   Checkbox,
+  Link,
 } from '@chakra-ui/react';
 import { AuthContext } from '../context/Auth';
 import { useHistory } from 'react-router';
@@ -23,9 +24,10 @@ import Meli from '../assets/companies/meli.png';
 import Santander from '../assets/companies/santander.png';
 import Globant from '../assets/companies/globant.png';
 import Despegar from '../assets/companies/despegar.png';
-import BackgroundLogin from '../assets/login-background.jpg';
+// import BackgroundLogin from '../assets/login-background.jpg';
 import toast, { Toaster } from 'react-hot-toast';
 import Spinner from '../components/Spinner';
+import Particles from 'react-particles-js';
 
 const enterprises = [
   {
@@ -91,159 +93,207 @@ export default function LoginPage() {
   }, [message]);
 
   return (
-    <Box
-      id="main-box"
-      position={'relative'}
-      h={'100vh'}
-      w="100%"
-      backgroundImage={BackgroundLogin}
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
-      p={12}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Toaster />
-      <Container
-        as={SimpleGrid}
-        maxW={'7xl'}
-        columns={{ base: 1, md: 2 }}
-        spacing={{ base: 10, lg: 32 }}
-        py={{ base: 10, sm: 20, lg: 32 }}
-        borderRadius="xl"
+    <>
+      <Box position="absolute" zIndex="9999" h={'100vh'} w="100%">
+        <Particles
+          height="100%"
+          params={{
+            particles: {
+              number: {
+                value: 50,
+              },
+              size: {
+                value: 3,
+              },
+            },
+            interactivity: {
+              events: {
+                onhover: {
+                  enable: true,
+                  mode: 'repulse',
+                },
+              },
+            },
+          }}
+        />
+      </Box>
+      <Box
+        id="main-box"
+        // position={'relative'}
+        position="absolute"
+        zIndex="9999"
+        h={'100vh'}
+        w="100%"
+        // backgroundImage={BackgroundLogin}
+        // opacity=".2"
+        // backgroundPosition="center"
+        // backgroundRepeat="no-repeat"
+        p={12}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
       >
-        <Stack spacing={{ base: 10, md: 20 }}>
-          <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }} style={{ zIndex: 1 }} color={'#ffffff'}>
-            Bienvenido a{' '}
-            <Text as={'span'} bgGradient="linear(to-r, red.400,pink.400)" bgClip="text">
-              MeetUs
-            </Text>
-            <br />
-            Ingresá y divertite
-          </Heading>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={4} align={'center'}>
-            <AvatarGroup>
-              {enterprises.map((enterprise) => (
-                <Avatar
-                  key={enterprise.name}
-                  name={enterprise.name}
-                  src={enterprise.url}
-                  size={'lg'}
-                  position={'relative'}
-                  zIndex={2}
-                  _before={{
-                    content: '""',
-                    width: 'full',
-                    height: 'full',
-                    rounded: 'full',
-                    transform: 'scale(1.125)',
-                    bgGradient: 'linear(to-bl, red.400,pink.400)',
-                    position: 'absolute',
-                    zIndex: -1,
-                    top: 0,
-                    left: 0,
-                  }}
-                />
-              ))}
-            </AvatarGroup>
-            <Text fontFamily={'heading'} fontSize={{ base: '2xl', md: '4xl' }}>
-              +
-            </Text>
-            <Flex
-              align={'center'}
-              justify={'center'}
-              fontFamily={'heading'}
-              fontSize={{ base: 'sm', md: 'lg' }}
-              bg={'gray.800'}
-              color={'white'}
-              rounded={'full'}
-              width={useBreakpointValue({ base: '60px', md: '60px' })}
-              height={useBreakpointValue({ base: '60px', md: '60px' })}
-              position={'relative'}
-              _before={{
-                content: '""',
-                width: 'full',
-                height: 'full',
-                rounded: 'full',
-                transform: 'scale(1.125)',
-                bgGradient: 'linear(to-bl, orange.400,yellow.400)',
-                position: 'absolute',
-                zIndex: -1,
-                top: 0,
-                left: 0,
-              }}
+        <Toaster />
+        <Container
+          as={SimpleGrid}
+          maxW={'7xl'}
+          columns={{ base: 1, md: 2 }}
+          spacing={{ base: 8, lg: 25 }}
+          py={{ base: 8, sm: 16, lg: 25 }}
+          borderRadius="xl"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Stack spacing={{ base: 10, md: 15 }}>
+            <Heading
+              lineHeight={1}
+              fontSize={{ base: '40px', sm: '40px', md: '65px', lg: '65px' }}
+              fontWeight={'semibold'}
+              style={{ zIndex: 1 }}
+              color={'#ffffff'}
+              textAlign={{ base: 'center', md: 'start' }}
             >
-              YOU
-            </Flex>
-          </Stack>
-        </Stack>
-        <Stack bg={'gray.50'} rounded={'xl'} p={{ base: 4, sm: 6, md: 8 }} spacing={{ base: 8 }} maxW={{ lg: 'lg' }}>
-          <Stack spacing={4}>
-            <Heading color={'gray.800'} lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
-              Inicia Sesión
-              <Text as={'span'} bgGradient="linear(to-r, red.400,pink.400)" bgClip="text">
-                !
+              Bienvenido a{' '}
+              <Text as={'span'} bg="brand.100" bgClip="text">
+                MeetUs!
               </Text>
+              <br />
+              Ingresá y divertite
             </Heading>
-            <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={4} align={'center'}>
+              <AvatarGroup>
+                {enterprises.map((enterprise) => (
+                  <Avatar
+                    key={enterprise.name}
+                    name={enterprise.name}
+                    src={enterprise.url}
+                    size={'lg'}
+                    position={'relative'}
+                    zIndex={2}
+                    border="10px solid brand.100"
+                    borderColor="brand.100"
+                    // _before={{
+                    //   content: '""',
+                    //   width: 'full',
+                    //   height: 'full',
+                    //   rounded: 'full',
+                    //   transform: 'scale(1.125)',
+                    //   bgGradient: 'linear(to-bl, red.400,pink.400)',
+                    //   position: 'absolute',
+                    //   zIndex: -1,
+                    //   top: 0,
+                    //   left: 0,
+                    // }}
+                  />
+                ))}
+              </AvatarGroup>
+              <Text fontFamily={'heading'} fontSize={{ base: '2xl', md: '4xl' }}>
+                +
+              </Text>
+              <Flex
+                align={'center'}
+                justify={'center'}
+                fontFamily={'heading'}
+                fontSize={{ base: 'sm', md: 'lg' }}
+                bg={'white'}
+                color={'black'}
+                rounded={'full'}
+                width={useBreakpointValue({ base: '60px', md: '60px' })}
+                height={useBreakpointValue({ base: '60px', md: '60px' })}
+                position={'relative'}
+                // border="2px solid brand.100"
+                // borderColor="brand.100"
+                _before={{
+                  content: '""',
+                  width: 'full',
+                  height: 'full',
+                  rounded: 'full',
+                  transform: 'scale(1.125)',
+                  bgGradient: 'brand.100',
+                  position: 'absolute',
+                  zIndex: -1,
+                  top: 0,
+                  left: 0,
+                }}
+              >
+                VOS
+              </Flex>
+            </Stack>
+          </Stack>
+          <Stack
+            id="session-box"
+            bg={'gray.50'}
+            rounded={'xl'}
+            p={{ base: 4, sm: 6, md: 6 }}
+            spacing={{ base: 8 }}
+            maxW={{ lg: 'lg' }}
+            border="2px solid"
+            borderColor="brand.100"
+          >
+            <Stack spacing={4}>
+              <Heading color={'gray.800'} lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }} fontWeight="semibold">
+                Inicia Sesión
+              </Heading>
+              {/* <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam harum maiores dicta cumque id modi distinctio atque inventore
               voluptatum.
-            </Text>
-          </Stack>
-          <Box as={'form'} mt={10}>
-            <Stack spacing={4}>
-              <Input
-                name="email"
-                placeholder="Email Corporativo"
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}
-                onChange={handleChange}
-                value={email}
-              />
-              <Input
-                name="password"
-                placeholder="Contraseña"
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}
-                onChange={handleChange}
-                value={password}
-              />
-              <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
-                <Checkbox>Recordarme</Checkbox>
-              </Stack>
-              <Button fontFamily={'heading'} bg={'gray.200'} color={'gray.800'} onClick={() => push('/register')}>
-                Registrarse
-              </Button>
+            </Text> */}
             </Stack>
-            <Button
-              fontFamily={'heading'}
-              mt={6}
-              w={'full'}
-              bgGradient="linear(to-r, red.400,pink.400)"
-              color={'white'}
-              _hover={{
-                bgGradient: 'linear(to-r, red.400,pink.400)',
-                boxShadow: 'xl',
-              }}
-              onClick={() => handleLogin()}
-            >
-              Ingresar
-            </Button>
-          </Box>
-          form
-        </Stack>
-      </Container>
-      {/* <Blur position={'absolute'} top={-10} left={-10} style={{ filter: 'blur(50px)' }} /> */}
-      {/* <Image
+            <Box as={'form'} mt={10}>
+              <Stack spacing={4}>
+                <Input
+                  name="email"
+                  placeholder="Email Corporativo"
+                  bg={'gray.100'}
+                  border={0}
+                  color={'gray.500'}
+                  _placeholder={{
+                    color: 'gray.500',
+                  }}
+                  onChange={handleChange}
+                  value={email}
+                />
+                <Input
+                  name="password"
+                  placeholder="Contraseña"
+                  bg={'gray.100'}
+                  border={0}
+                  color={'gray.500'}
+                  _placeholder={{
+                    color: 'gray.500',
+                  }}
+                  onChange={handleChange}
+                  value={password}
+                />
+                <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'} color="black">
+                  <Checkbox borderColor="brand.100">Recordarme</Checkbox>
+                </Stack>
+                <Button fontFamily={'heading'} bg={'gray.200'} color={'gray.800'} onClick={() => push('/register')}>
+                  Registrarse
+                </Button>
+              </Stack>
+              <Button
+                fontFamily={'heading'}
+                mt={6}
+                w={'full'}
+                bg="brand.100"
+                color={'white'}
+                _hover={{
+                  boxShadow: 'xl',
+                }}
+                onClick={() => handleLogin()}
+              >
+                Ingresar
+              </Button>
+              <Box w="full" textAlign="center" mt={4}>
+                <Link color="black">¿Olvidaste tu contraseña?</Link>
+              </Box>
+            </Box>
+            form
+          </Stack>
+        </Container>
+        {/* <Blur position={'absolute'} top={-10} left={-10} style={{ filter: 'blur(50px)' }} /> */}
+        {/* <Image
         position={'absolute'}
         top={-10}
         left={-10}
@@ -254,8 +304,10 @@ export default function LoginPage() {
           'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
         }
       /> */}
-      {loading && <Spinner />}
-    </Box>
+        {loading && <Spinner />}
+      </Box>
+      {/* </Particles> */}
+    </>
   );
 }
 
