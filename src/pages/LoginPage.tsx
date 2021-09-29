@@ -28,6 +28,7 @@ import Despegar from '../assets/companies/despegar.png';
 import toast, { Toaster } from 'react-hot-toast';
 import Spinner from '../components/Spinner';
 import Particles from 'react-particles-js';
+import './LoginPage.css';
 
 const enterprises = [
   {

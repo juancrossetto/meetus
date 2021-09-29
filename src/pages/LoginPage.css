@@ -1,0 +1,9 @@
+/* canvas {
+  width: 100% !important;
+  height: 100% !important;
+} */
+
+.tsparticles-canvas-el {
+  width: 100% !important;
+  height: 100vh !important;
+}
