@@ -96,7 +96,8 @@ export default function LoginPage() {
     <>
       <Box position="absolute" zIndex="9999" h={'100vh'} w="100%" backgroundColor="brand.900">
         <Particles
-          height="100%"
+          height="100%!important"
+          style={{ height: '100%!important' }}
           params={{
             particles: {
               number: {
