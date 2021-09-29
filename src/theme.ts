@@ -25,6 +25,7 @@ export default extendTheme({
     },
     brand: {
       100: '#5985eb',
+      900: '#1a202c',
     },
   },
 });
