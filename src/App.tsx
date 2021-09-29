@@ -9,6 +9,7 @@ import TriviaPage from './pages/TriviaPage';
 import RegisterPage from './pages/RegisterPage';
 import RewardsPage from './pages/RewardsPage';
 import PrivateRoute from './components/PrivateRoute';
+import ForgetPasswordPage from './pages/ForgetPassword';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <PrivateRoute component={TriviaPage} path="/trivia" />
       <PrivateRoute component={RoomsPage} path="/rooms" />
       <Route exact component={RegisterPage} path="/register" />
+      <Route exact component={ForgetPasswordPage} path="/recover-password" />
       <Route exact component={LoginPage} path="/login" />
       <PrivateRoute component={HomePage} path="/" />
       {/* <Redirect exact to="/" /> */}

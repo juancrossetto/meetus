@@ -59,14 +59,22 @@ export default function LoginPage() {
   const { push, goBack, location } = useHistory();
   const { message, authenticated, login, loading } = useContext(AuthContext);
   const [account, setAccount] = useState<User>({
-    email: DEFAULT_EMAIL,
-    password: DEFAULT_PASS,
+    email: '',
+    password: '',
     points: 0,
   });
   const { email, password } = account;
 
   const handleLogin = () => {
-    login(account);
+    if (email === '' || password === '') {
+      login({
+        ...account,
+        email: DEFAULT_EMAIL,
+        password: DEFAULT_PASS,
+      });
+    } else {
+      login(account);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -314,7 +322,9 @@ export default function LoginPage() {
                 Ingresar
               </Button>
               <Box w="full" textAlign="center" mt={4}>
-                <Link color="black">¿Olvidaste tu contraseña?</Link>
+                <Link color="black" onClick={() => push('/recover-password')}>
+                  ¿Olvidaste tu contraseña?
+                </Link>
               </Box>
             </Box>
             form
