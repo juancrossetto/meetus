@@ -44,10 +44,10 @@ const ImageUploader: FC<ImageUploaderProps> = ({ setImage }) => {
                   <Button
                     fontFamily={'heading'}
                     // mt={2}
-                    bgGradient={isDragging ? 'gray.100' : 'linear(to-r, red.400,pink.400)'}
+                    bg={isDragging ? 'gray.100' : 'brand.100'}
                     color={isDragging ? 'blue' : 'white'}
                     _hover={{
-                      bgGradient: isDragging ? 'gray.100' : 'linear(to-r, red.400,pink.400)',
+                      bg: isDragging ? 'gray.100' : 'brand.100',
                       boxShadow: 'xl',
                     }}
                     onClick={() => onImageRemove(index)}
@@ -63,10 +63,11 @@ const ImageUploader: FC<ImageUploaderProps> = ({ setImage }) => {
                 fontFamily={'heading'}
                 mt={6}
                 w={'2xs'}
-                bgGradient={isDragging ? 'gray.100' : 'linear(to-r, red.400,pink.400)'}
+                bg={isDragging ? 'gray.100' : 'brand.100'}
                 color={isDragging ? 'blue' : 'white'}
                 _hover={{
-                  bgGradient: isDragging ? 'gray.100' : 'linear(to-r, red.400,pink.400)',
+                  bg: isDragging ? 'gray.100' : 'brand.900',
+                  border: '1px solid white',
                   boxShadow: 'xl',
                 }}
                 onClick={onImageUpload}

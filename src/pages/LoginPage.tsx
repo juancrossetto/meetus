@@ -101,11 +101,14 @@ export default function LoginPage() {
           style={{ height: '100%!important' }}
           params={{
             particles: {
+              color: {
+                value: '##5985eb',
+              },
               number: {
-                value: 50,
+                value: 80,
               },
               size: {
-                value: 3,
+                value: 5,
               },
             },
             interactivity: {
@@ -116,6 +119,21 @@ export default function LoginPage() {
                 },
               },
             },
+            themes: [
+              {
+                name: 'light',
+                default: {
+                  value: true,
+                },
+                options: {
+                  particles: {
+                    color: {
+                      value: ['#5985eb'],
+                    },
+                  },
+                },
+              },
+            ],
           }}
         />
       </Box>
@@ -270,7 +288,13 @@ export default function LoginPage() {
                 <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'} color="black">
                   <Checkbox borderColor="brand.100">Recordarme</Checkbox>
                 </Stack>
-                <Button fontFamily={'heading'} bg={'gray.200'} color={'gray.800'} onClick={() => push('/register')}>
+                <Button
+                  fontFamily={'heading'}
+                  bg={'gray.200'}
+                  color={'gray.800'}
+                  onClick={() => push('/register')}
+                  _hover={{ bg: 'gray.300' }}
+                >
                   Registrarse
                 </Button>
               </Stack>
@@ -282,6 +306,8 @@ export default function LoginPage() {
                 color={'white'}
                 _hover={{
                   boxShadow: 'xl',
+                  border: '1px solid white',
+                  bg: 'brand.900',
                 }}
                 onClick={() => handleLogin()}
               >

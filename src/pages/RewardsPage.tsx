@@ -101,12 +101,12 @@ const RewardsPage: FC<RewardsPageProps> = () => {
             onChange={(val) => setPoints(val)}
             flex={3}
           >
-            <SliderTrack bg="red.100">
-              <SliderFilledTrack bg="#f2657a" />
+            <SliderTrack bg="blue.100">
+              <SliderFilledTrack bg="brand.100" />
             </SliderTrack>
             <SliderThumb boxSize={8}>
-              <Box color="#f2657a" as={MdGraphicEq} />
-              <Text color={useColorModeValue('black', 'white')} fontWeight="bold" position="absolute" bottom="-22px">
+              <Box color="brand.100" as={MdGraphicEq} />
+              <Text color={useColorModeValue('brand.900', 'white')} fontWeight="bold" position="absolute" bottom="-22px">
                 {formatNumber(points.toString())}
               </Text>
             </SliderThumb>
@@ -187,7 +187,7 @@ const ProductDrawer: FC<ProductDrawerProps> = ({ product, handleExchange, onClos
           <Button variant="outline" mr={3} onClick={onClose}>
             Cancelar
           </Button>
-          <Button bg="#f2657a" onClick={() => handleExchange()} disabled={(user && user.points < product.points) || product.stock <= 0}>
+          <Button bg="brand.100" onClick={() => handleExchange()} disabled={(user && user.points < product.points) || product.stock <= 0}>
             Canjear
           </Button>
         </DrawerFooter>

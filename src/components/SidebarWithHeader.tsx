@@ -89,7 +89,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-  const { push } = useHistory();
+  const { push, location } = useHistory();
+  console.log('location', location);
   return (
     <Box
       transition="3s ease"
@@ -102,13 +103,20 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" _hover={{ cursor: 'pointer' }} onClick={() => push('/')}>
-          MeetUs
+        <Text
+          fontSize="4xl"
+          fontFamily="monospace"
+          fontWeight="bold"
+          _hover={{ cursor: 'pointer' }}
+          onClick={() => push('/')}
+          color="brand.100"
+        >
+          MeetUs!
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={() => push(link.url)}>
+        <NavItem key={link.name} selected={link.url === location.pathname} icon={link.icon} onClick={() => push(link.url)}>
           {link.name}
         </NavItem>
       ))}
@@ -118,11 +126,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
+  selected: boolean;
   children: ReactText;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, selected, children, ...rest }: NavItemProps) => {
+  console.log('children', children);
   return (
-    <Link href="#" style={{ textDecoration: 'none' }}>
+    <Link href="#" style={{ textDecoration: 'none' }} color={selected ? 'brand.100' : 'black'} fontWeight={selected ? 'bold' : 'normal'}>
       <Flex
         align="center"
         p="4"
@@ -131,7 +141,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
+          bg: 'brand.100',
           color: 'white',
         }}
         {...rest}
