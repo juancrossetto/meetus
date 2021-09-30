@@ -1,18 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import { Image, Button, HStack, VStack, Stack } from '@chakra-ui/react';
 import NotProfileImage from '../assets/not-profile-image.jpg';
 
 interface ImageUploaderProps {
+  defaultImage?: any;
   setImage?: (image?: any) => void;
 }
-const ImageUploader: FC<ImageUploaderProps> = ({ setImage }) => {
-  const [images, setImages] = React.useState([]);
+const ImageUploader: FC<ImageUploaderProps> = ({ defaultImage, setImage }) => {
+  const [images, setImages] = React.useState<any>([]);
   const maxNumber = 1;
+  useEffect(() => {
+    if (defaultImage) {
+      console.log('defaultImage', defaultImage);
+      setImages([defaultImage]);
+    }
+  }, [defaultImage]);
 
   const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
-    setImages(imageList as never[]);
+    setImages(imageList as any[]);
     if (imageList && imageList.length && setImage) {
+      console.log('imageList[0].dataURL', imageList[0].dataURL);
       setImage(imageList[0].dataURL);
     }
   };

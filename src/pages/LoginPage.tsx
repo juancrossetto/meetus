@@ -282,6 +282,7 @@ export default function LoginPage() {
                   value={email}
                 />
                 <Input
+                  type="password"
                   name="password"
                   placeholder="Contraseña"
                   bg={'gray.100'}
