@@ -90,7 +90,6 @@ interface SidebarProps extends BoxProps {
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { push, location } = useHistory();
-  console.log('location', location);
   return (
     <Box
       transition="3s ease"
@@ -130,9 +129,13 @@ interface NavItemProps extends FlexProps {
   children: ReactText;
 }
 const NavItem = ({ icon, selected, children, ...rest }: NavItemProps) => {
-  console.log('children', children);
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} color={selected ? 'brand.100' : 'black'} fontWeight={selected ? 'bold' : 'normal'}>
+    <Link
+      href="#"
+      style={{ textDecoration: 'none' }}
+      color={useColorModeValue(selected ? 'brand.100' : 'black', selected ? 'brand.100' : 'white')}
+      fontWeight={selected ? 'bold' : 'normal'}
+    >
       <Flex
         align="center"
         p="4"
@@ -189,8 +192,16 @@ const MobileNav = ({ onOpen, closeSession, user, ...rest }: MobileProps) => {
     >
       <IconButton display={{ base: 'flex', md: 'none' }} onClick={onOpen} variant="outline" aria-label="open menu" icon={<FiMenu />} />
 
-      <Text display={{ base: 'flex', md: 'none' }} fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-        Logo
+      <Text
+        display={{ base: 'flex', md: 'none' }}
+        fontSize="2xl"
+        fontFamily="monospace"
+        fontWeight="bold"
+        _hover={{ cursor: 'pointer' }}
+        onClick={() => push('/')}
+        color="brand.100"
+      >
+        MeetUs!
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>

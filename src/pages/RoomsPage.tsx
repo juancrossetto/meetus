@@ -15,6 +15,7 @@ const RoomsPage: FC<RoomsPageProps> = () => {
           src="https://meetus-rooms.netlify.app/"
           allow="geolocation; microphone; camera; midi; encrypted-media;"
           onLoad={() => setIsLoading(false)}
+          style={{ borderRadius: '10px' }}
         />
       </AspectRatio>
       {isLoading && <Spinner />}
