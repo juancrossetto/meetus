@@ -24,4 +24,66 @@ export const dailyQuestions: DailyQuestion[] = [
       },
     ],
   },
+  {
+    question: '¿Cuál es la misión de la empresa?',
+    answers: [
+      {
+        id: 1,
+        answer: 'Organizar la información del mundo y hacerla universalmente accesible y útil.',
+        isCorrect: false,
+      },
+      {
+        id: 2,
+        answer: 'Refrescar al mundo. Hacer la diferencia.',
+        isCorrect: false,
+      },
+      {
+        id: 3,
+        answer:
+          ' Cuestionar la hipótesis. Pensar en profundidad. La repetición como un estilo de vida. Detalles y más detalles. El diseño en todas partes. Integridad.',
+        isCorrect: false,
+      },
+      {
+        id: 4,
+        answer: 'Crear y promover bebidas de excelente sabor, más sanas y orgánicas.',
+        isCorrect: false,
+      },
+      {
+        id: 5,
+        answer: 'Dar al cliente el mejor servicio y variedad, calidad y valor de productos.',
+        isCorrect: true,
+      },
+    ],
+  },
+  {
+    question: '¿Cuál es la visión de la empresa?',
+    answers: [
+      {
+        id: 1,
+        answer: 'Servir mejor a nuestros clientes para ser siempre relevantes en sus vidas y formar relaciones duraderas.',
+        isCorrect: true,
+      },
+      {
+        id: 2,
+        answer: 'Proporcionar acceso a la información del mundo en un solo clic.',
+        isCorrect: false,
+      },
+      {
+        id: 3,
+        answer: 'Ofrecer la mejor experiencia de productos digitales por medio de nuestra plataforma.',
+        isCorrect: false,
+      },
+      {
+        id: 4,
+        answer: 'Mejorar la vida diaria de muchas personas.',
+        isCorrect: false,
+      },
+      {
+        id: 5,
+        answer:
+          'Ser la empresa más centrada en el cliente del mundo; para construir un lugar donde las personas puedan buscar y descubrir cualquier cosa que deseen comprar en línea.',
+        isCorrect: false,
+      },
+    ],
+  },
 ];
