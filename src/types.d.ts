@@ -52,3 +52,14 @@ interface Account {
   email: string;
   password: string;
 }
+
+interface DailyQuestion {
+  question: string;
+  answers: AnswerDailyQuestion[];
+}
+
+interface AnswerDailyQuestion {
+  id: number;
+  answer: string;
+  isCorrect: boolean;
+}

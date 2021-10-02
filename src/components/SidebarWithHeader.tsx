@@ -23,6 +23,7 @@ import {
   MenuList,
   useColorMode,
   Badge,
+  Tooltip,
 } from '@chakra-ui/react';
 import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiChevronDown, FiGift } from 'react-icons/fi';
 import { FaQuestion } from 'react-icons/fa';
@@ -115,7 +116,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} selected={link.url === location.pathname} icon={link.icon} onClick={() => push(link.url)}>
+        <NavItem key={link.name} selected={link.url === location.pathname} icon={link.icon} url={link.url}>
           {link.name}
         </NavItem>
       ))}
@@ -125,13 +126,19 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
+  url: string;
   selected: boolean;
   children: ReactText;
 }
-const NavItem = ({ icon, selected, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, url, selected, children, ...rest }: NavItemProps) => {
+  const { push } = useHistory();
+  const dailyResponse = localStorage.getItem('DAILY_QUESTION_ANSWERED');
+  const isDailyQuestionPage = children === 'Pregunta Diaria';
+
   return (
     <Link
-      href="#"
+      onClick={() => (dailyResponse && isDailyQuestionPage ? console.log('opcion no valida') : push(url))}
+      // href={url}
       style={{ textDecoration: 'none' }}
       color={useColorModeValue(selected ? 'brand.100' : 'black', selected ? 'brand.100' : 'white')}
       fontWeight={selected ? 'bold' : 'normal'}
@@ -142,9 +149,9 @@ const NavItem = ({ icon, selected, children, ...rest }: NavItemProps) => {
         mx="4"
         borderRadius="lg"
         role="group"
-        cursor="pointer"
+        cursor={dailyResponse && isDailyQuestionPage ? 'default' : 'pointer'}
         _hover={{
-          bg: 'brand.100',
+          bg: dailyResponse && isDailyQuestionPage ? 'transparent' : 'brand.100',
           color: 'white',
         }}
         {...rest}
@@ -159,7 +166,18 @@ const NavItem = ({ icon, selected, children, ...rest }: NavItemProps) => {
             as={icon}
           />
         )}
-        {children}
+        {isDailyQuestionPage && dailyResponse ? (
+          <Tooltip
+            label={`Ya respondió ${dailyResponse === 'correct' ? 'Correctamente' : ' Incorrectamente'}`}
+            bg={dailyResponse === 'correct' ? '#4bb543' : ' #f2657a'}
+            placement="right-end"
+            fontSize="md"
+          >
+            {children}
+          </Tooltip>
+        ) : (
+          children
+        )}
       </Flex>
     </Link>
   );
