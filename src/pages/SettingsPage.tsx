@@ -1,7 +1,7 @@
-import React, { useContext, useState, FC } from 'react';
+import React, { useContext, useState, FC, useEffect } from 'react';
 import { Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, HStack } from '@chakra-ui/react';
 import toast, { Toaster } from 'react-hot-toast';
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { AuthContext } from '../context/Auth';
 import Spinner from '../components/Spinner';
 import ImageUploader from '../components/ImageUploader';
@@ -10,10 +10,14 @@ import Layout from '../components/Layout';
 interface SettingsPageProps {}
 
 const SettingsPage: FC<SettingsPageProps> = () => {
-  // const { push } = useHistory();
-  const { loading, registerUser, user } = useContext(AuthContext);
-  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-  const [account, setAccount] = useState(
+  const { push } = useHistory();
+  const {
+    loading,
+    //  registerUser,
+    user,
+  } = useContext(AuthContext);
+  // const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const [account, setAccount] = useState<User>(
     user || {
       name: '',
       surName: '',
@@ -51,8 +55,8 @@ const SettingsPage: FC<SettingsPageProps> = () => {
       address === '' ||
       city === '' ||
       country === '' ||
-      phoneNumber === '' ||
-      password === ''
+      phoneNumber === ''
+      // password === ''
     ) {
       toast('!Todos los campos son obligatorios!', {
         icon: '⚠️',
@@ -65,18 +69,28 @@ const SettingsPage: FC<SettingsPageProps> = () => {
       return;
     }
 
-    if (password !== passwordConfirm) {
-      toast('Las contraseñas no son iguales', {
-        icon: '😔',
-        style: {
-          borderRadius: '10px',
-          background: '#f2657a',
-          color: '#fff',
-        },
-      });
-      return;
-    }
-    registerUser(account);
+    // if (password !== passwordConfirm) {
+    //   toast('Las contraseñas no son iguales', {
+    //     icon: '😔',
+    //     style: {
+    //       borderRadius: '10px',
+    //       background: '#f2657a',
+    //       color: '#fff',
+    //     },
+    //   });
+    //   return;
+    // }
+    // registerUser(account);
+    toast('Datos actualizados correctamente!', {
+      icon: '😃',
+      style: {
+        borderRadius: '10px',
+        background: '#4bb543',
+        color: '#fff',
+      },
+    });
+    localStorage.setItem('user', JSON.stringify(account));
+    push('/');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +99,13 @@ const SettingsPage: FC<SettingsPageProps> = () => {
       [e.target.name]: e.target.value,
     });
   };
+  useEffect(() => {
+    if (user) {
+      console.log('user', typeof user);
+      // setAccount(JSON.parse(user));
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout>
@@ -141,7 +162,7 @@ const SettingsPage: FC<SettingsPageProps> = () => {
                   <Input name="country" value={country} onChange={handleChange} />
                 </FormControl>
               </HStack>
-              <HStack spacing={2}>
+              {/* <HStack spacing={2}>
                 <FormControl id="password">
                   <FormLabel mb={0}>Contraseña</FormLabel>
                   <Input name="password" type="password" value={password} onChange={handleChange} />
@@ -155,7 +176,7 @@ const SettingsPage: FC<SettingsPageProps> = () => {
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                   />
                 </FormControl>
-              </HStack>
+              </HStack> */}
               <Stack spacing={10}>
                 <Button
                   bg={'brand.100'}

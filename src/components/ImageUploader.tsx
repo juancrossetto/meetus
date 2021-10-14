@@ -12,7 +12,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ defaultImage, setImage }) => {
   const maxNumber = 1;
   useEffect(() => {
     if (defaultImage) {
-      console.log('defaultImage', defaultImage);
+      console.log('defaultImage', defaultImage?.dataURL);
       setImages([defaultImage]);
     }
   }, [defaultImage]);
