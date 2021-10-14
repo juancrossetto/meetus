@@ -43,6 +43,28 @@ const SettingsPage: FC<SettingsPageProps> = () => {
       return;
     }
 
+    if (
+      name === '' ||
+      surName === '' ||
+      dni === '' ||
+      email === '' ||
+      address === '' ||
+      city === '' ||
+      country === '' ||
+      phoneNumber === '' ||
+      password === ''
+    ) {
+      toast('!Todos los campos son obligatorios!', {
+        icon: '⚠️',
+        style: {
+          borderRadius: '10px',
+          background: '#f2657a',
+          color: '#fff',
+        },
+      });
+      return;
+    }
+
     if (password !== passwordConfirm) {
       toast('Las contraseñas no son iguales', {
         icon: '😔',

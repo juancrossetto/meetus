@@ -25,9 +25,16 @@ import {
   Badge,
   Tooltip,
 } from '@chakra-ui/react';
-import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiChevronDown, FiGift } from 'react-icons/fi';
-import { FaQuestion } from 'react-icons/fa';
-import { GiTalk } from 'react-icons/gi';
+import {
+  FiHome,
+  //  FiTrendingUp,
+  FiSettings,
+  FiMenu,
+  FiChevronDown,
+  FiGift,
+} from 'react-icons/fi';
+// import { FaQuestion } from 'react-icons/fa';
+// import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { useHistory } from 'react-router';
@@ -44,9 +51,9 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Inicio', icon: FiHome, url: '/' },
-  { name: 'Trivia', icon: FiTrendingUp, url: '/trivia' },
-  { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
-  { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
+  // { name: 'Trivia', icon: FiTrendingUp, url: '/trivia' },
+  // { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
+  // { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
   { name: 'Canjear Puntos', icon: FiGift, url: '/rewards' },
   { name: 'Configuración', icon: FiSettings, url: '/settings' },
 ];
