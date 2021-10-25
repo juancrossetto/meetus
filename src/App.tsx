@@ -8,10 +8,10 @@ import HomePage from './pages/HomePage';
 
 import RewardsPage from './pages/RewardsPage';
 import PrivateRoute from './components/PrivateRoute';
-// import DailyQuestionPage from './pages/DailyQuestionPage';
+import DailyQuestionPage from './pages/DailyQuestionPage';
 // import LoginPage from './pages/LoginPage';
-// import RoomsPage from './pages/RoomsPage';
-// import TriviaPage from './pages/TriviaPage';
+import RoomsPage from './pages/RoomsPage';
+import TriviaPage from './pages/TriviaPage';
 // import RegisterPage from './pages/RegisterPage';
 // import ForgetPasswordPage from './pages/ForgetPassword';
 
@@ -20,9 +20,9 @@ function App() {
     <Switch>
       <PrivateRoute component={SettingsPage} path="/settings" />
       <PrivateRoute component={RewardsPage} path="/rewards" />
-      {/* <PrivateRoute component={DailyQuestionPage} path="/daily-question" />
+      <PrivateRoute component={DailyQuestionPage} path="/daily-question" />
       <PrivateRoute component={TriviaPage} path="/trivia" />
-      <PrivateRoute component={RoomsPage} path="/rooms" /> */}
+      <PrivateRoute component={RoomsPage} path="/rooms" />
       {/* <Route exact component={RegisterPage} path="/register" />
       <Route exact component={ForgetPasswordPage} path="/recover-password" />
       <Route exact component={LoginPage} path="/login" /> */}

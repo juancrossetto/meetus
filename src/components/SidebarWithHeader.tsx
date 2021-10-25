@@ -27,14 +27,14 @@ import {
 } from '@chakra-ui/react';
 import {
   FiHome,
-  //  FiTrendingUp,
+   FiTrendingUp,
   FiSettings,
   FiMenu,
   FiChevronDown,
   FiGift,
 } from 'react-icons/fi';
-// import { FaQuestion } from 'react-icons/fa';
-// import { GiTalk } from 'react-icons/gi';
+import { FaQuestion } from 'react-icons/fa';
+import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { useHistory } from 'react-router';
@@ -51,9 +51,9 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Inicio', icon: FiHome, url: '/' },
-  // { name: 'Trivia', icon: FiTrendingUp, url: '/trivia' },
-  // { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
-  // { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
+  { name: 'Trivia', icon: FiTrendingUp, url: '/trivia' },
+  { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
+  { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
   { name: 'Canjear Puntos', icon: FiGift, url: '/rewards' },
   { name: 'Configuración', icon: FiSettings, url: '/settings' },
 ];
@@ -159,7 +159,7 @@ const NavItem = ({ icon, url, selected, children, ...rest }: NavItemProps) => {
         cursor={dailyResponse && isDailyQuestionPage ? 'default' : 'pointer'}
         _hover={{
           bg: dailyResponse && isDailyQuestionPage ? 'transparent' : 'brand.100',
-          color: 'white',
+          color: useColorModeValue('black', 'white'),
         }}
         {...rest}
       >
@@ -167,9 +167,6 @@ const NavItem = ({ icon, url, selected, children, ...rest }: NavItemProps) => {
           <Icon
             mr="4"
             fontSize="16"
-            _groupHover={{
-              color: 'white',
-            }}
             as={icon}
           />
         )}
