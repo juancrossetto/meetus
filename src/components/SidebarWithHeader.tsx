@@ -196,10 +196,10 @@ const MobileNav = ({ onOpen, closeSession, user, ...rest }: MobileProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { push } = useHistory();
 
-  // const handleCloseSession = () => {
-  //   closeSession();
-  //   push('/login');
-  // };
+  const handleCloseSession = () => {
+    closeSession();
+    push('/login');
+  };
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -262,8 +262,7 @@ const MobileNav = ({ onOpen, closeSession, user, ...rest }: MobileProps) => {
                 </Badge>
               </MenuItem>
               <MenuDivider />
-              {/* <MenuItem onClick={() => handleCloseSession()}>Cerrar Sesión</MenuItem> */}
-              <MenuItem onClick={() => console.log('cerrando sesión')}>Cerrar Sesión</MenuItem>
+              <MenuItem onClick={() => handleCloseSession()}>Cerrar Sesión</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

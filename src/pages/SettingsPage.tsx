@@ -13,7 +13,7 @@ const SettingsPage: FC<SettingsPageProps> = () => {
   const { push } = useHistory();
   const {
     loading,
-    //  registerUser,
+     registerUser,
     user,
   } = useContext(AuthContext);
   // const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -80,7 +80,7 @@ const SettingsPage: FC<SettingsPageProps> = () => {
     //   });
     //   return;
     // }
-    // registerUser(account);
+    registerUser(account);
     toast('Datos actualizados correctamente!', {
       icon: '😃',
       style: {
