@@ -50,10 +50,10 @@ const DogsProvider: FC = ({ children }) => {
   const updatePoints = async (points: number) => {
     try {
       setLoading(true);
-      const resp = await axiosClient.post(`/updateUserPoints/${user.id}`, points);
+      const resp = await axiosClient.post(`/users/updatePoints/${user._id}`, {points});
       setAuthenticated(true);
       setMessage(null);
-      localStorage.setItem('token', resp.data);
+      localStorage.setItem('user', JSON.stringify(resp.data.user));
       // get user authenticated
       userAuthenticated();
       setLoading(false);
@@ -77,9 +77,8 @@ const DogsProvider: FC = ({ children }) => {
     try {
       const usr = localStorage.getItem('user');
       if (usr) {
-        setUser(usr);
-        // console.log('usr', usr);
-        // setUser(JSON.parse(usr));
+        // setUser(usr);
+        setUser(JSON.parse(usr));
       } else {
         const resp = await axiosClient.get('/auth');
         setUser(resp.data.user);

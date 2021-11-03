@@ -23,6 +23,7 @@ export const dailyQuestions: DailyQuestion[] = [
         isCorrect: false,
       },
     ],
+    points: 10000
   },
   {
     question: '¿Cuál es la misión de la empresa?',
@@ -54,6 +55,7 @@ export const dailyQuestions: DailyQuestion[] = [
         isCorrect: true,
       },
     ],
+    points: 20000
   },
   {
     question: '¿Cuál es la visión de la empresa?',
@@ -85,5 +87,6 @@ export const dailyQuestions: DailyQuestion[] = [
         isCorrect: false,
       },
     ],
+    points: 15000
   },
 ];

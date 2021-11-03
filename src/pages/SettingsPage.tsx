@@ -99,13 +99,6 @@ const SettingsPage: FC<SettingsPageProps> = () => {
       [e.target.name]: e.target.value,
     });
   };
-  useEffect(() => {
-    if (user) {
-      console.log('user', typeof user);
-      // setAccount(JSON.parse(user));
-    }
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <Layout>

@@ -59,13 +59,14 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function SidebarWithHeader({ children }: { children?: ReactNode }) {
-  const { closeSession, loading, message, authenticated, user } = useContext(AuthContext);
+  const { closeSession, loading, message, authenticated, user, updatePoints } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     if (message) {
       toast(message.msg);
     }
   }, [message]);
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -83,7 +84,7 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} closeSession={closeSession} user={user} />
+      <MobileNav onOpen={onOpen} closeSession={closeSession} user={user} updatePoints={updatePoints}/>
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
@@ -190,12 +191,12 @@ const NavItem = ({ icon, url, selected, children, ...rest }: NavItemProps) => {
 interface MobileProps extends FlexProps {
   onOpen: () => void;
   closeSession: () => void;
+  updatePoints: (points: number) => void;
   user?: User | null;
 }
-const MobileNav = ({ onOpen, closeSession, user, ...rest }: MobileProps) => {
+const MobileNav = ({ onOpen, closeSession, updatePoints, user, ...rest }: MobileProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { push } = useHistory();
-
   const handleCloseSession = () => {
     closeSession();
     push('/login');
@@ -257,7 +258,7 @@ const MobileNav = ({ onOpen, closeSession, user, ...rest }: MobileProps) => {
               <MenuItem onClick={() => push('/settings')}>Perfil</MenuItem>
               <MenuItem>
                 Puntos
-                <Badge colorScheme="green" fontSize="0.8em" ml={3}>
+                <Badge colorScheme="green" fontSize="0.8em" ml={3} onClick={() => updatePoints(10)}>
                   {formatNumber(user && user.points ? user.points.toString() : '0')}
                 </Badge>
               </MenuItem>
