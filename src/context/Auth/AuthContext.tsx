@@ -15,6 +15,7 @@ const contextDefaultValues: AuthContextState = {
   login: () => {},
   closeSession: () => {},
   changePassword: () => {},
+  updatePoints: () => {},
 };
 
 export const AuthContext = createContext<AuthContextState>(contextDefaultValues);
@@ -30,6 +31,26 @@ const DogsProvider: FC = ({ children }) => {
     try {
       setLoading(true);
       const resp = await axiosClient.post(`/users`, data);
+      setAuthenticated(true);
+      setMessage(null);
+      localStorage.setItem('token', resp.data);
+      // get user authenticated
+      userAuthenticated();
+      setLoading(false);
+    } catch (error: any) {
+      const alert = {
+        msg: error.response.data.errores ? error.response.data.errores[0].msg : error.response.data.msg,
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
+  const updatePoints = async (points: number) => {
+    try {
+      setLoading(true);
+      const resp = await axiosClient.post(`/updateUserPoints/${user.id}`, points);
       setAuthenticated(true);
       setMessage(null);
       localStorage.setItem('token', resp.data);
@@ -160,6 +181,7 @@ const DogsProvider: FC = ({ children }) => {
         login,
         closeSession,
         changePassword,
+        updatePoints
       }}
     >
       {children}

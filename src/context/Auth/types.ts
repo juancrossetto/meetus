@@ -9,4 +9,5 @@ export interface AuthContextState {
   login: (data: User) => void;
   closeSession: () => void;
   changePassword: (data: any) => void;
+  updatePoints: (points: number) => void;
 }

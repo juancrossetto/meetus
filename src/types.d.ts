@@ -27,6 +27,7 @@ interface Message {
 }
 
 interface User {
+  id?: string;
   name?: string;
   surName?: string;
   dni?: string;
