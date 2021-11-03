@@ -1,4 +1,4 @@
-import React, { useContext, useState, FC, useEffect } from 'react';
+import React, { useContext, useState, FC } from 'react';
 import { Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, HStack } from '@chakra-ui/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router';
