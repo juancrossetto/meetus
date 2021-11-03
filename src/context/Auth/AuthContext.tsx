@@ -53,7 +53,7 @@ const DogsProvider: FC = ({ children }) => {
       const resp = await axiosClient.post(`/updateUserPoints/${user.id}`, points);
       setAuthenticated(true);
       setMessage(null);
-      localStorage.setItem('token', resp.data);
+      localStorage.setItem('user', resp.data.user);
       // get user authenticated
       userAuthenticated();
       setLoading(false);
