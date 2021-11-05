@@ -1,8 +1,9 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router';
 import Layout from '../components/Layout';
 import { dailyQuestions } from '../utils/dailyQuestionsMock';
+import { AuthContext } from '../context/Auth';
 import { Box, Button, Stack, Heading, Text, Container, VStack, Checkbox } from '@chakra-ui/react';
 
 interface DailyQuestionPageProps {}
@@ -11,6 +12,7 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
   const [responses, setResponses] = useState<AnswerDailyQuestion[]>([]);
   const { push } = useHistory();
   const [dailyQuestion, setDailyQuestion] = useState<DailyQuestion>();
+  const { updatePoints } = useContext(AuthContext);
   const handleCheck = (answer: AnswerDailyQuestion) => {
     if (responses?.filter((r) => r.id === answer.id).length) {
       setResponses(responses.filter((r) => r.id !== answer.id));
@@ -39,7 +41,8 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
       });
       localStorage.setItem('DAILY_QUESTION_ANSWERED', 'incorrect');
     } else {
-      toast('Respuesta Correcta, felicitaciones, sumaste 5.000 puntos', {
+      updatePoints(dailyQuestion?.points ?? 0);
+      toast(`Respuesta Correcta, felicitaciones, sumaste ${dailyQuestion?.points} puntos`, {
         icon: '😃',
         style: {
           borderRadius: '10px',

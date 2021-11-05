@@ -1,4 +1,4 @@
-import React, { useContext, useState, FC, useEffect } from 'react';
+import React, { useContext, useState, FC } from 'react';
 import { Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, HStack } from '@chakra-ui/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router';
@@ -99,13 +99,6 @@ const SettingsPage: FC<SettingsPageProps> = () => {
       [e.target.name]: e.target.value,
     });
   };
-  useEffect(() => {
-    if (user) {
-      console.log('user', typeof user);
-      // setAccount(JSON.parse(user));
-    }
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <Layout>

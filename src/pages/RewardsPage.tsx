@@ -60,7 +60,7 @@ const item = {
 };
 
 const RewardsPage: FC<RewardsPageProps> = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading: ctxLoading, updatePoints} = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
@@ -72,6 +72,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
 
   const handleExchange = (product: Product) => {
     setLoading(true);
+    updatePoints(product.points * -1);
     setTimeout(() => {
       toast.success('Canje realizado correctamente, recibira un mail con mas información', { duration: 5000 });
       setLoading(false);
@@ -132,7 +133,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
           </Flex>
         </motion.div>
       </Layout>
-      {loading && <Spinner />}
+      {(loading  || ctxLoading) && <Spinner />}
       <Toaster />
       {productSelected && (
         <ProductDrawer

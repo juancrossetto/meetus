@@ -57,6 +57,7 @@ interface Account {
 interface DailyQuestion {
   question: string;
   answers: AnswerDailyQuestion[];
+  points: number;
 }
 
 interface AnswerDailyQuestion {
