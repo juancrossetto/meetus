@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Box, FormControl, FormLabel, Input, Stack, Link, Button, Heading, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import { MdArrowBack } from 'react-icons/md';
 import toast, { Toaster } from 'react-hot-toast';
@@ -11,7 +11,7 @@ import './LoginPage.css';
 
 export default function RegisterPage() {
   const { push } = useHistory();
-  const { loading, registerUser } = useContext(AuthContext);
+  const { loading, message, registerUser } = useContext(AuthContext);
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
   const [account, setAccount] = useState({
     name: '',
@@ -74,6 +74,22 @@ export default function RegisterPage() {
     }
     registerUser(account);
   };
+
+  useEffect(() => {
+    if (message) {
+      toast(message.msg, {
+        style: {
+          borderRadius: '10px',
+          background: message.category === 'error' ? '#ff4c4c' : '#5985eb',
+          color: '#fff',
+        },
+      });
+    }
+  }, [message]);
+
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
@@ -138,6 +154,7 @@ export default function RegisterPage() {
         // bg={useColorModeValue('gray.50', 'gray.800')}
         p={4}
       >
+        <Toaster />
         <Button
           leftIcon={<MdArrowBack />}
           fontFamily={'heading'}

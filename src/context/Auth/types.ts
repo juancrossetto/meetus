@@ -10,4 +10,6 @@ export interface AuthContextState {
   closeSession: () => void;
   changePassword: (data: any) => void;
   updatePoints: (points: number) => void;
+  updateUserPoints: () => void;
+  setMessage: (msg: React.SetStateAction<Message | null>) => void;
 }

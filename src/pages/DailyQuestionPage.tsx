@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useContext} from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router';
 import Layout from '../components/Layout';
@@ -22,6 +22,7 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
   };
 
   useEffect(() => {
+    toast.dismiss();
     const daily = dailyQuestions[Math.floor(Math.random() * (dailyQuestions.length - 0) + 0)];
     if (daily) {
       setDailyQuestion(daily);

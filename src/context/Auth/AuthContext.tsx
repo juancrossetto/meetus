@@ -16,11 +16,13 @@ const contextDefaultValues: AuthContextState = {
   closeSession: () => {},
   changePassword: () => {},
   updatePoints: () => {},
+  updateUserPoints: () => {},
+  setMessage: () => {},
 };
 
 export const AuthContext = createContext<AuthContextState>(contextDefaultValues);
 
-const DogsProvider: FC = ({ children }) => {
+const AuthProvider: FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(contextDefaultValues.token);
   const [authenticated, setAuthenticated] = useState<boolean | null>(contextDefaultValues.authenticated);
   const [message, setMessage] = useState<Message | null>(contextDefaultValues.message);
@@ -37,6 +39,10 @@ const DogsProvider: FC = ({ children }) => {
       // get user authenticated
       userAuthenticated();
       setLoading(false);
+      setMessage({ msg: `Felicitaciones ${data.name}, te registraste correctamente`, category: 'success' });
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
     } catch (error: any) {
       const alert = {
         msg: error.response.data.errores ? error.response.data.errores[0].msg : error.response.data.msg,
@@ -50,16 +56,43 @@ const DogsProvider: FC = ({ children }) => {
   const updatePoints = async (points: number) => {
     try {
       setLoading(true);
-      const resp = await axiosClient.post(`/users/updatePoints/${user._id}`, {points});
-      setAuthenticated(true);
-      setMessage(null);
-      localStorage.setItem('user', JSON.stringify(resp.data.user));
-      // get user authenticated
-      userAuthenticated();
+      const resp = await axiosClient.post(`/users/updatePoints/${user._id}`, { points });
+      if (resp && resp.data) {
+        setAuthenticated(true);
+        localStorage.setItem('user', JSON.stringify(resp.data.user));
+        // get user authenticated
+        userAuthenticated();
+      }
+
       setLoading(false);
     } catch (error: any) {
       const alert = {
-        msg: error.response.data.errores ? error.response.data.errores[0].msg : error.response.data.msg,
+        msg: 'Error al actualizar puntos de usuario',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
+  const updateUserPoints = async () => {
+    try {
+      const usr = localStorage.getItem('user');
+      if (usr) {
+        let userUpdated = JSON.parse(usr);
+        const resp = await axiosClient.get(`/users/getPoints/${userUpdated._id}`);
+        if (usr && resp && resp.data) {
+          userUpdated.points = resp.data.points;
+          localStorage.setItem('user', JSON.stringify(userUpdated));
+        }
+        //  else {
+        //   setAuthenticated(null);
+        // }
+      }
+    } catch (error: any) {
+      console.log('Error al obtener puntos de usuario', error);
+      const alert = {
+        msg: 'Error al obtener puntos de usuario',
         category: 'error',
       };
 
@@ -180,7 +213,9 @@ const DogsProvider: FC = ({ children }) => {
         login,
         closeSession,
         changePassword,
-        updatePoints
+        updatePoints,
+        updateUserPoints,
+        setMessage,
       }}
     >
       {children}
@@ -188,4 +223,4 @@ const DogsProvider: FC = ({ children }) => {
   );
 };
 
-export default DogsProvider;
+export default AuthProvider;

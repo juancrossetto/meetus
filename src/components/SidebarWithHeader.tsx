@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactText, useContext, useEffect } from 'react';
+import React, { ReactNode, ReactText, useContext, useEffect, useState } from 'react';
 import {
   IconButton,
   Avatar,
@@ -25,14 +25,7 @@ import {
   Badge,
   Tooltip,
 } from '@chakra-ui/react';
-import {
-  FiHome,
-   FiTrendingUp,
-  FiSettings,
-  FiMenu,
-  FiChevronDown,
-  FiGift,
-} from 'react-icons/fi';
+import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiChevronDown, FiGift } from 'react-icons/fi';
 import { FaQuestion } from 'react-icons/fa';
 import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';
@@ -60,7 +53,18 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function SidebarWithHeader({ children }: { children?: ReactNode }) {
   const { closeSession, loading, message, authenticated, user, updatePoints } = useContext(AuthContext);
+  const [points, setPoints] = useState<number>(user?.points || 0);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    toast.dismiss();
+    const interval = setInterval(() => {
+      const usr = localStorage.getItem('user');
+      if (usr) setPoints(JSON.parse(usr).points);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     if (message) {
       toast(message.msg);
@@ -84,7 +88,7 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} closeSession={closeSession} user={user} updatePoints={updatePoints}/>
+      <MobileNav onOpen={onOpen} closeSession={closeSession} user={user} updatePoints={updatePoints} points={points} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
@@ -164,13 +168,7 @@ const NavItem = ({ icon, url, selected, children, ...rest }: NavItemProps) => {
         }}
         {...rest}
       >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            as={icon}
-          />
-        )}
+        {icon && <Icon mr="4" fontSize="16" as={icon} />}
         {isDailyQuestionPage && dailyResponse ? (
           <Tooltip
             label={`Ya respondió ${dailyResponse === 'correct' ? 'Correctamente' : ' Incorrectamente'}`}
@@ -193,8 +191,9 @@ interface MobileProps extends FlexProps {
   closeSession: () => void;
   updatePoints: (points: number) => void;
   user?: User | null;
+  points: number;
 }
-const MobileNav = ({ onOpen, closeSession, updatePoints, user, ...rest }: MobileProps) => {
+const MobileNav = ({ onOpen, closeSession, updatePoints, user, points, ...rest }: MobileProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { push } = useHistory();
   const handleCloseSession = () => {
@@ -259,7 +258,7 @@ const MobileNav = ({ onOpen, closeSession, updatePoints, user, ...rest }: Mobile
               <MenuItem>
                 Puntos
                 <Badge colorScheme="green" fontSize="0.8em" ml={3} onClick={() => updatePoints(10)}>
-                  {formatNumber(user && user.points ? user.points.toString() : '0')}
+                  {formatNumber(points.toString())}
                 </Badge>
               </MenuItem>
               <MenuDivider />

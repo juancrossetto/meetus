@@ -7,10 +7,14 @@ interface PrivateRouteProps {
   path: string;
 }
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, path, ...props }) => {
-  const { authenticated, loading, userAuthenticated } = useContext(AuthContext);
+  const { authenticated, loading, userAuthenticated, updateUserPoints } = useContext(AuthContext);
 
   useEffect(() => {
     userAuthenticated();
+    const interval = setInterval(() => {
+      updateUserPoints();
+    }, 5000);
+    return () => clearInterval(interval);
     // eslint-disable-next-line
   }, []);
 

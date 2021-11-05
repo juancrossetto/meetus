@@ -101,6 +101,11 @@ export default function LoginPage() {
     }
   }, [message]);
 
+  useEffect(() => {
+    toast.dismiss();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <Box position="absolute" zIndex="9999" h={'100vh'} w="100%" backgroundColor="brand.900">
@@ -299,28 +304,28 @@ export default function LoginPage() {
                 </Stack>
                 <Button
                   fontFamily={'heading'}
-                  bg={'gray.200'}
-                  color={'gray.800'}
-                  onClick={() => push('/register')}
-                  _hover={{ bg: 'gray.300' }}
+                  bg="brand.100"
+                  color={'white'}
+                  _hover={{
+                    boxShadow: 'xl',
+                    border: '1px solid white',
+                    bg: 'brand.900',
+                  }}
+                  onClick={() => handleLogin()}
                 >
-                  Registrarse
+                  Ingresar
                 </Button>
               </Stack>
               <Button
                 fontFamily={'heading'}
                 mt={6}
                 w={'full'}
-                bg="brand.100"
-                color={'white'}
-                _hover={{
-                  boxShadow: 'xl',
-                  border: '1px solid white',
-                  bg: 'brand.900',
-                }}
-                onClick={() => handleLogin()}
+                bg={'gray.200'}
+                color={'gray.800'}
+                _hover={{ bg: 'gray.300' }}
+                onClick={() => push('/register')}
               >
-                Ingresar
+                Registrarse
               </Button>
               <Box w="full" textAlign="center" mt={4}>
                 <Link color="black" onClick={() => push('/recover-password')}>
