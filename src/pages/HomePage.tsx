@@ -23,6 +23,10 @@ const HomePage: FC<HomePageProps> = () => {
     // eslint-disable-next-line
   }, []);
 
+  // useEffect(() => {
+  //   console.log('imageLoaded',imageLoaded);
+  // }, [imageLoaded]);
+
   return (
     <Layout>
       <Skeleton isLoaded={imageLoaded}>
