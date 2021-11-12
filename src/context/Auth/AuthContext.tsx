@@ -45,7 +45,7 @@ const AuthProvider: FC = ({ children }) => {
       setMessage({ msg: `Felicitaciones ${data.name}, te registraste correctamente`, category: 'success' });
       setTimeout(() => {
         window.location.href = '/login';
-      }, 2000);
+      }, 1500);
     } catch (error: any) {
       const alert = {
         msg: error.response.data.errores ? error.response.data.errores[0].msg : error.response.data.msg,

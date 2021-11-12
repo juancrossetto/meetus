@@ -26,7 +26,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import { FiHome, FiTrendingUp, FiSettings, FiMenu, FiChevronDown, FiGift } from 'react-icons/fi';
-import { FaQuestion } from 'react-icons/fa';
+import { FaQuestion, FaGifts } from 'react-icons/fa';
 import { GiTalk } from 'react-icons/gi';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import { IconType } from 'react-icons';
@@ -41,15 +41,17 @@ interface LinkItemProps {
   name: string;
   icon: IconType;
   url: string;
+  allowRole: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Inicio', icon: FiHome, url: '/' },
-  { name: 'Trivia', icon: FiTrendingUp, url: '/trivia' },
-  { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
-  { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
-  { name: 'Canjear Puntos', icon: FiGift, url: '/rewards' },
-  // { name: 'Historial de Canjes', icon: FiGift, url: '/trading-history' },
-  { name: 'Configuración', icon: FiSettings, url: '/settings' },
+  { name: 'Inicio', icon: FiHome, url: '/', allowRole: 'all' },
+  { name: 'Trivia', icon: FiTrendingUp, url: '/trivia', allowRole: 'user' },
+  { name: 'Charlemos', icon: GiTalk, url: '/rooms', allowRole: 'user' },
+  { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question', allowRole: 'user' },
+  { name: 'Canjear Puntos', icon: FiGift, url: '/rewards', allowRole: 'user' },
+  { name: 'Historial de Canjes', icon: FaGifts, url: '/trading-history', allowRole: 'user' },
+  { name: 'Configuración Pregunta Diaria', icon: FaGifts, url: '/daily-question-config', allowRole: 'rrhh' },
+  { name: 'Configuración', icon: FiSettings, url: '/settings', allowRole: 'all' },
 ];
 
 export default function SidebarWithHeader({ children }: { children?: ReactNode }) {
@@ -59,6 +61,9 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
 
   useEffect(() => {
     toast.dismiss();
+    // if (user && user.role === 'all' && !LinkItems.find((l) => l.name === 'Historial de Canjes')) {
+    //   LinkItems.splice(5, 0);
+    // }
     const interval = setInterval(() => {
       const usr = localStorage.getItem('user');
       if (usr) setPoints(JSON.parse(usr).points);
@@ -74,7 +79,7 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+      <SidebarContent user={user} onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
@@ -85,7 +90,7 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
         size="full"
       >
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent user={user} onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
@@ -99,10 +104,11 @@ export default function SidebarWithHeader({ children }: { children?: ReactNode }
 }
 
 interface SidebarProps extends BoxProps {
+  user: User | null;
   onClose: () => void;
 }
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({ user, onClose, ...rest }: SidebarProps) => {
   const { push, location } = useHistory();
   return (
     <Box
@@ -128,7 +134,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {LinkItems.filter((l) => ['all', user?.role].includes(l.allowRole)).map((link) => (
         <NavItem key={link.name} selected={link.url === location.pathname} icon={link.icon} url={link.url}>
           {link.name}
         </NavItem>
@@ -256,12 +262,14 @@ const MobileNav = ({ onOpen, closeSession, updatePoints, user, points, ...rest }
             </MenuButton>
             <MenuList bg={useColorModeValue('white', 'gray.900')} borderColor={useColorModeValue('gray.200', 'gray.700')} zIndex="99">
               <MenuItem onClick={() => push('/settings')}>Perfil</MenuItem>
-              <MenuItem>
-                Puntos
-                <Badge colorScheme="green" fontSize="0.8em" ml={3}>
-                  {formatNumber(points.toString())}
-                </Badge>
-              </MenuItem>
+              {['user', 'all'].includes(user?.role ?? '') && (
+                <MenuItem>
+                  Puntos
+                  <Badge colorScheme="green" fontSize="0.8em" ml={3}>
+                    {formatNumber(points.toString())}
+                  </Badge>
+                </MenuItem>
+              )}
               <MenuDivider />
               <MenuItem onClick={() => handleCloseSession()}>Cerrar Sesión</MenuItem>
             </MenuList>

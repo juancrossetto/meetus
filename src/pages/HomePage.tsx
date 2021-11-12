@@ -44,19 +44,21 @@ const HomePage: FC<HomePageProps> = () => {
               height="600px"
               onLoad={() => setImageLoaded(true)}
             />
-            <Button
-              fontFamily={'heading'}
-              bg="brand.100"
-              color={'white'}
-              _hover={{
-                boxShadow: 'xl',
-                border: '1px solid white',
-                bg: 'brand.900',
-              }}
-              onClick={() => push('/trivia')}
-            >
-              Comenzar a Jugar
-            </Button>
+            {['user', 'all'].includes(user?.role ?? '') && (
+              <Button
+                fontFamily={'heading'}
+                bg="brand.100"
+                color={'white'}
+                _hover={{
+                  boxShadow: 'xl',
+                  border: '1px solid white',
+                  bg: 'brand.900',
+                }}
+                onClick={() => push('/trivia')}
+              >
+                Comenzar a Jugar
+              </Button>
+            )}
           </VStack>
         </Box>
       </Skeleton>

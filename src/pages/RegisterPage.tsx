@@ -25,6 +25,7 @@ export default function RegisterPage() {
     image: '',
     phoneNumber: '',
     points: 0,
+    role: 'user',
   });
   const { name, surName, dni, email, password, address, city, country, phoneNumber } = account;
 

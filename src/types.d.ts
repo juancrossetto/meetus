@@ -39,6 +39,7 @@ interface User {
   phoneNumber?: string;
   image?: string;
   points: number;
+  role?: string;
 }
 
 interface Address {
