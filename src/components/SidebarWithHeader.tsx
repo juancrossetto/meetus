@@ -257,7 +257,7 @@ const MobileNav = ({ onOpen, closeSession, updatePoints, user, points, ...rest }
               <MenuItem onClick={() => push('/settings')}>Perfil</MenuItem>
               <MenuItem>
                 Puntos
-                <Badge colorScheme="green" fontSize="0.8em" ml={3} onClick={() => updatePoints(10)}>
+                <Badge colorScheme="green" fontSize="0.8em" ml={3}>
                   {formatNumber(points.toString())}
                 </Badge>
               </MenuItem>

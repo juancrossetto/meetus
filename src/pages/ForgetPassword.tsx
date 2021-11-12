@@ -33,10 +33,10 @@ const ForgetPasswordPage: FC<ForgetPasswordPageProps> = () => {
   };
   return (
     <>
-      <Box position="absolute" zIndex="9999" h={'100vh'} w="100%" backgroundColor="brand.900">
+      <Box position="absolute" zIndex="9999" h={'150vh'} w="100%" backgroundColor="brand.900">
         <Particles
-          height="100%!important"
-          style={{ height: '100%!important' }}
+          height="150vh!important"
+          style={{ height: '150vh!important' }}
           params={{
             particles: {
               color: {

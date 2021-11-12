@@ -60,7 +60,7 @@ const item = {
 };
 
 const RewardsPage: FC<RewardsPageProps> = () => {
-  const { user, loading: ctxLoading, updatePoints} = useContext(AuthContext);
+  const { user, loading: ctxLoading, updatePoints, sendEmail} = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
@@ -72,7 +72,24 @@ const RewardsPage: FC<RewardsPageProps> = () => {
 
   const handleExchange = (product: Product) => {
     setLoading(true);
-    updatePoints(product.points * -1);
+    const text = `<p style="font-size: 14px;color:black">Estimado/a, Usted ha canjeado un ${product.name} por ${product.points} puntos.</p> <br />
+      <img src="https://www.webnode.es/blog/files/2018/07/online-store.png" alt="Producto canjeado" width="250" height="250">  <br />
+      <span style="font-size: 11px;;color:black;">
+        ${product.description} <br /> 
+      <span> 
+      <span style="font-size: 14px;color:black">
+        En aproximadamente 5 dias va a recibir un voucher por el monto canjeado. <br />
+        Esperamos que lo disfrute. <br />
+        MeetUs.
+      </span>`
+     console.log('text', text);
+    const email: Email = {
+      to: user?.email ?? 'juancrossetto@gmail.com',
+      subject: 'Canje Meetus',
+      text,
+    }
+    sendEmail(email);
+    // updatePoints(product.points * -1);
     setTimeout(() => {
       toast.success('Canje realizado correctamente, recibira un mail con mas información', { duration: 5000 });
       setLoading(false);

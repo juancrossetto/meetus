@@ -12,4 +12,5 @@ export interface AuthContextState {
   updatePoints: (points: number) => void;
   updateUserPoints: () => void;
   setMessage: (msg: React.SetStateAction<Message | null>) => void;
+  sendEmail: (email: Email) => void;
 }

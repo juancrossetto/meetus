@@ -65,3 +65,9 @@ interface AnswerDailyQuestion {
   answer: string;
   isCorrect: boolean;
 }
+
+interface Email {
+  subject: string;
+  to: string;
+  text: string;
+}

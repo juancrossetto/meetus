@@ -51,7 +51,7 @@ const HomePage: FC<HomePageProps> = () => {
                 border: '1px solid white',
                 bg: 'brand.900',
               }}
-              onClick={() => push('/register')}
+              onClick={() => push('/trivia')}
             >
               Comenzar a Jugar
             </Button>

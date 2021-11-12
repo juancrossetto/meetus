@@ -18,6 +18,7 @@ const contextDefaultValues: AuthContextState = {
   updatePoints: () => {},
   updateUserPoints: () => {},
   setMessage: () => {},
+  sendEmail: () => {},
 };
 
 export const AuthContext = createContext<AuthContextState>(contextDefaultValues);
@@ -187,6 +188,24 @@ const AuthProvider: FC = ({ children }) => {
     }
   };
 
+  const sendEmail = async (email: Email) => {
+    try {
+        const resp = await axiosClient.post('/email', email);
+        if(resp) {
+          console.log('resp', resp.data);
+          return resp.data;
+        }
+    } catch (error: any) {
+      console.log('Error al enviar mail', error);
+      const alert = {
+        msg: 'Error al obtener mail',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
   const handleError = (msg?: Message | null) => {
     setToken(null);
     setUser(null);
@@ -216,6 +235,7 @@ const AuthProvider: FC = ({ children }) => {
         updatePoints,
         updateUserPoints,
         setMessage,
+        sendEmail,
       }}
     >
       {children}
