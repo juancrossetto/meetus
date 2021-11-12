@@ -48,6 +48,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Charlemos', icon: GiTalk, url: '/rooms' },
   { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question' },
   { name: 'Canjear Puntos', icon: FiGift, url: '/rewards' },
+  // { name: 'Historial de Canjes', icon: FiGift, url: '/trading-history' },
   { name: 'Configuración', icon: FiSettings, url: '/settings' },
 ];
 

@@ -71,3 +71,11 @@ interface Email {
   to: string;
   text: string;
 }
+
+interface Trade {
+  id: number;
+  userId: string;
+  product: Product;
+  points: number;
+  fechaAlta: string;
+}

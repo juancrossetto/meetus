@@ -27,7 +27,7 @@ const RewardCard: FC<RewardCardProps> = ({ product, onClick }) => {
         >
           <Skeleton isLoaded={imageLoaded}>
             <Image
-              src={product.images[0].url}
+              src={typeof product.images === 'string' ? product.images : product.images[0].url}
               alt={`Picture of ${product.name}`}
               roundedTop="lg"
               minH="270px"

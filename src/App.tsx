@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Route,
-  Switch,
-} from 'react-router';
+import { Route, Switch } from 'react-router';
 import SettingsPage from './pages/SettingsPage';
 import HomePage from './pages/HomePage';
 
@@ -12,12 +9,14 @@ import DailyQuestionPage from './pages/DailyQuestionPage';
 import LoginPage from './pages/LoginPage';
 import RoomsPage from './pages/RoomsPage';
 import TriviaPage from './pages/TriviaPage';
+import TradingHistoryPage from './pages/TradingHistoryPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgetPasswordPage from './pages/ForgetPassword';
 
 function App() {
   return (
     <Switch>
+      <PrivateRoute component={TradingHistoryPage} path="/trading-history" />
       <PrivateRoute component={SettingsPage} path="/settings" />
       <PrivateRoute component={RewardsPage} path="/rewards" />
       <PrivateRoute component={DailyQuestionPage} path="/daily-question" />

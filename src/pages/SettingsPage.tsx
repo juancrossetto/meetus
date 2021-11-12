@@ -1,4 +1,4 @@
-import React, { useContext, useState, FC } from 'react';
+import React, { useContext, useState, FC, useEffect } from 'react';
 import { Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, HStack } from '@chakra-ui/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router';
@@ -11,11 +11,7 @@ interface SettingsPageProps {}
 
 const SettingsPage: FC<SettingsPageProps> = () => {
   const { push } = useHistory();
-  const {
-    loading,
-     registerUser,
-    user,
-  } = useContext(AuthContext);
+  const { loading, registerUser, user } = useContext(AuthContext);
   // const [passwordConfirm, setPasswordConfirm] = useState<string>('');
   const [account, setAccount] = useState<User>(
     user || {
@@ -33,6 +29,10 @@ const SettingsPage: FC<SettingsPageProps> = () => {
     }
   );
   const { name, surName, dni, email, password, address, city, country, phoneNumber, image } = account;
+
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   const handleSubmit = () => {
     if (password && password.length < 6) {

@@ -13,4 +13,6 @@ export interface AuthContextState {
   updateUserPoints: () => void;
   setMessage: (msg: React.SetStateAction<Message | null>) => void;
   sendEmail: (email: Email) => void;
+  getDailyQuestions: () => any;
+  getHistoryTrades: () => any;
 }

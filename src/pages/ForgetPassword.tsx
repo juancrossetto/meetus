@@ -1,4 +1,4 @@
-import React, { useContext, useState, FC } from 'react';
+import React, { useContext, useState, FC, useEffect } from 'react';
 import { Box, FormControl, FormLabel, Input, Stack, Button, Heading, Text, useColorModeValue, HStack } from '@chakra-ui/react';
 import { MdArrowBack } from 'react-icons/md';
 import toast, { Toaster } from 'react-hot-toast';
@@ -17,6 +17,10 @@ const ForgetPasswordPage: FC<ForgetPasswordPageProps> = () => {
   const [email, setEmail] = useState<string>('');
   const [code, setCode] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   const handleSubmit = () => {
     if (password.length < 6) {

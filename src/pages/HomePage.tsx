@@ -1,6 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Box, Button, Heading, Image, VStack, Skeleton } from '@chakra-ui/react';
+import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../context/Auth';
 import Social1 from '../assets/social-1.png';
 import Social2 from '../assets/social-2.png';
@@ -18,6 +19,7 @@ const HomePage: FC<HomePageProps> = () => {
   const { push } = useHistory();
   const { userAuthenticated, user } = useContext(AuthContext);
   useEffect(() => {
+    toast.dismiss();
     userAuthenticated();
     setImage(images[Math.floor(Math.random() * (images.length - 0) + 0)]);
     // eslint-disable-next-line
@@ -58,6 +60,7 @@ const HomePage: FC<HomePageProps> = () => {
           </VStack>
         </Box>
       </Skeleton>
+      <Toaster />
     </Layout>
   );
 };

@@ -60,7 +60,7 @@ const item = {
 };
 
 const RewardsPage: FC<RewardsPageProps> = () => {
-  const { user, loading: ctxLoading, updatePoints, sendEmail} = useContext(AuthContext);
+  const { user, loading: ctxLoading, updatePoints, sendEmail } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
@@ -81,21 +81,25 @@ const RewardsPage: FC<RewardsPageProps> = () => {
         En aproximadamente 5 dias va a recibir un voucher por el monto canjeado. <br />
         Esperamos que lo disfrute. <br />
         MeetUs.
-      </span>`
-     console.log('text', text);
+      </span>`;
+    console.log('text', text);
     const email: Email = {
       to: user?.email ?? 'juancrossetto@gmail.com',
       subject: 'Canje Meetus',
       text,
-    }
+    };
     sendEmail(email);
-    // updatePoints(product.points * -1);
+    updatePoints(product.points * -1);
     setTimeout(() => {
       toast.success('Canje realizado correctamente, recibira un mail con mas información', { duration: 5000 });
       setLoading(false);
       onClose();
     }, 1500);
   };
+
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   useEffect(() => {
     setProductsFiltered(products.filter((p) => p.points <= points && p.name.toLowerCase().includes(filter.toLowerCase())));
@@ -150,7 +154,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
           </Flex>
         </motion.div>
       </Layout>
-      {(loading  || ctxLoading) && <Spinner />}
+      {(loading || ctxLoading) && <Spinner />}
       <Toaster />
       {productSelected && (
         <ProductDrawer

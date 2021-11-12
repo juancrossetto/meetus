@@ -19,6 +19,8 @@ const contextDefaultValues: AuthContextState = {
   updateUserPoints: () => {},
   setMessage: () => {},
   sendEmail: () => {},
+  getDailyQuestions: () => null,
+  getHistoryTrades: () => null,
 };
 
 export const AuthContext = createContext<AuthContextState>(contextDefaultValues);
@@ -190,15 +192,55 @@ const AuthProvider: FC = ({ children }) => {
 
   const sendEmail = async (email: Email) => {
     try {
-        const resp = await axiosClient.post('/email', email);
-        if(resp) {
-          console.log('resp', resp.data);
-          return resp.data;
-        }
+      setLoading(true);
+      const resp = await axiosClient.post('/email', email);
+      if (resp) {
+        setLoading(false);
+        return resp.data;
+      }
     } catch (error: any) {
       console.log('Error al enviar mail', error);
       const alert = {
         msg: 'Error al obtener mail',
+        category: 'error',
+      };
+
+      handleError(alert);
+      setLoading(false);
+    }
+  };
+
+  const getDailyQuestions = async () => {
+    try {
+      const resp = await axiosClient.get<DailyQuestion[]>('/dailyQuestion');
+      if (resp) {
+        return resp.data;
+      }
+    } catch (error: any) {
+      console.log('Error al obtener preguntas diarias', error);
+      const alert = {
+        msg: 'Error al obtener preguntas diarias',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
+  const getHistoryTrades = async () => {
+    try {
+      const usr = localStorage.getItem('user');
+      if (usr) {
+        let userUpdated = JSON.parse(usr);
+        const resp = await axiosClient.get<DailyQuestion[]>(`/trade/${userUpdated._id}`);
+        if (resp) {
+          return resp.data;
+        }
+      }
+    } catch (error: any) {
+      console.log('Error al obtener historial de canjes', error);
+      const alert = {
+        msg: 'Error al obtener historial de canjes',
         category: 'error',
       };
 
@@ -236,6 +278,8 @@ const AuthProvider: FC = ({ children }) => {
         updateUserPoints,
         setMessage,
         sendEmail,
+        getDailyQuestions,
+        getHistoryTrades,
       }}
     >
       {children}
