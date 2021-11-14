@@ -249,7 +249,9 @@ const MobileNav = ({ onOpen, closeSession, updatePoints, user, points, ...rest }
                 <Avatar size={'md'} src={user?.image} />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">
-                    {user ? `${capitalizeFirstLetter(user.name || '')} ${capitalizeFirstLetter(user.surName || '')}` : '-'}
+                    {user
+                      ? `${capitalizeFirstLetter(user.name || '')} ${capitalizeFirstLetter(user.surName || '')} (${user.role || ''})`
+                      : '-'}
                   </Text>
                   <Text fontSize="xs" color="gray.600">
                     {user?.email}

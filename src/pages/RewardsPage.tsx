@@ -27,6 +27,7 @@ import {
   Heading,
   Image,
 } from '@chakra-ui/react';
+import { useHistory } from 'react-router';
 import { MdGraphicEq } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { BsSearch } from 'react-icons/bs';
@@ -60,6 +61,7 @@ const item = {
 };
 
 const RewardsPage: FC<RewardsPageProps> = () => {
+  const { push } = useHistory();
   const { user, loading: ctxLoading, updatePoints, sendEmail } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
@@ -137,9 +139,26 @@ const RewardsPage: FC<RewardsPageProps> = () => {
             <Input placeholder="Filtrar..." value={filter} onChange={(e) => setFilter(e.target.value)} />
             <InputRightElement children={<BsSearch color="green.500" />} />
           </InputGroup>
+          <Button
+            mt={6}
+            w={'8rem'}
+            bg="brand.100"
+            color={'white'}
+            _hover={{
+              boxShadow: 'xl',
+              border: '1px solid white',
+              bg: 'brand.900',
+            }}
+            position="absolute"
+            right="32px"
+            top="135px"
+            onClick={() => push('/trading-history')}
+          >
+            Mis Canjes
+          </Button>
         </Flex>
         <motion.div variants={container} initial="hidden" animate="visible">
-          <Flex flexWrap="wrap" justifyContent="center">
+          <Flex flexWrap="wrap" justifyContent="center" id="reward-cards-container" mt={5}>
             {productsFiltered && productsFiltered.length ? (
               productsFiltered.map((product: Product) => (
                 <motion.div variants={item} whileHover={{ scale: [1, 1.03, 1], rotate: [0, 0, 0] }} key={product.name}>
