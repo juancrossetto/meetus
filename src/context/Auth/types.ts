@@ -14,5 +14,8 @@ export interface AuthContextState {
   setMessage: (msg: React.SetStateAction<Message | null>) => void;
   sendEmail: (email: Email) => void;
   getDailyQuestions: () => any;
+  createDailyQuestion: (dailyQuestion: DailyQuestion) => void;
   getHistoryTrades: () => any;
+  getSchedule: () => any;
+  updateSchedule: (schedule: Schedule) => void;
 }

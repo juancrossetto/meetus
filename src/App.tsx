@@ -13,7 +13,7 @@ import TradingHistoryPage from './pages/TradingHistoryPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgetPasswordPage from './pages/ForgetPassword';
 import { AuthContext } from './context/Auth';
-import DailyQuestionConfigPage from './pages/DailyQuestionConfigPage';
+import AdministrationPage from './pages/AdministrationPage';
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <Switch>
-      {['rrhh', 'all'].includes(user?.role ?? '') && <PrivateRoute component={DailyQuestionConfigPage} path="/daily-question-config" />}
+      {['rrhh', 'all'].includes(user?.role ?? '') && <PrivateRoute component={AdministrationPage} path="/administration" />}
       {['user', 'all'].includes(user?.role ?? '') && <PrivateRoute component={TradingHistoryPage} path="/trading-history" />}
       <PrivateRoute component={SettingsPage} path="/settings" />
       {['user', 'all'].includes(user?.role ?? '') && <PrivateRoute component={RewardsPage} path="/rewards" />}

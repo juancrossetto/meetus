@@ -50,7 +50,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Pregunta Diaria', icon: FaQuestion, url: '/daily-question', allowRole: 'user' },
   { name: 'Canjear Puntos', icon: FiGift, url: '/rewards', allowRole: 'user' },
   { name: 'Historial de Canjes', icon: FaGifts, url: '/trading-history', allowRole: 'user' },
-  { name: 'Configuración Pregunta Diaria', icon: FaGifts, url: '/daily-question-config', allowRole: 'rrhh' },
+  { name: 'Administración', icon: FaGifts, url: '/administration', allowRole: 'rrhh' },
   { name: 'Configuración', icon: FiSettings, url: '/settings', allowRole: 'all' },
 ];
 

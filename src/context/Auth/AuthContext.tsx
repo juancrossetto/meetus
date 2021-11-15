@@ -19,8 +19,11 @@ const contextDefaultValues: AuthContextState = {
   updateUserPoints: () => {},
   setMessage: () => {},
   sendEmail: () => {},
+  createDailyQuestion: () => {},
   getDailyQuestions: () => null,
   getHistoryTrades: () => null,
+  getSchedule: () => null,
+  updateSchedule: () => null,
 };
 
 export const AuthContext = createContext<AuthContextState>(contextDefaultValues);
@@ -227,6 +230,22 @@ const AuthProvider: FC = ({ children }) => {
     }
   };
 
+  const createDailyQuestion = async (req: DailyQuestion) => {
+    try {
+      setLoading(true);
+      await axiosClient.post('/dailyQuestion', req);
+      setLoading(false);
+    } catch (error: any) {
+      console.log('Error al crear pregunta diaria', error);
+      const alert = {
+        msg: 'Error al obtener pregunta diaria',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
   const getHistoryTrades = async () => {
     try {
       const usr = localStorage.getItem('user');
@@ -241,6 +260,41 @@ const AuthProvider: FC = ({ children }) => {
       console.log('Error al obtener historial de canjes', error);
       const alert = {
         msg: 'Error al obtener historial de canjes',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
+  const getSchedule = async () => {
+    try {
+      setLoading(true);
+      const resp = await axiosClient.get<Schedule>('/schedule');
+      setLoading(false);
+      if (resp) {
+        return resp.data;
+      }
+    } catch (error: any) {
+      console.log('Error al obtener horario', error);
+      const alert = {
+        msg: 'Error al obtener horario',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
+  const updateSchedule = async (req: Schedule) => {
+    try {
+      setLoading(true);
+      await axiosClient.post('/schedule', req);
+      setLoading(false);
+    } catch (error: any) {
+      console.log('Error al actualizar horario', error);
+      const alert = {
+        msg: 'Error al actualizar horario',
         category: 'error',
       };
 
@@ -279,7 +333,10 @@ const AuthProvider: FC = ({ children }) => {
         setMessage,
         sendEmail,
         getDailyQuestions,
+        createDailyQuestion,
         getHistoryTrades,
+        getSchedule,
+        updateSchedule,
       }}
     >
       {children}

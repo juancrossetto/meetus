@@ -62,7 +62,7 @@ interface DailyQuestion {
 }
 
 interface AnswerDailyQuestion {
-  id: number;
+  id?: number;
   answer: string;
   isCorrect: boolean;
 }
@@ -79,4 +79,11 @@ interface Trade {
   product: Product;
   points: number;
   fechaAlta: string;
+}
+
+interface Schedule {
+  hourFrom: string;
+  hourTo: string;
+  minuteFrom: string;
+  minuteTo: string;
 }

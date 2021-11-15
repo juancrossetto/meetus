@@ -17,6 +17,7 @@ import {
   Checkbox,
   Link,
 } from '@chakra-ui/react';
+import moment from 'moment-mini';
 import { AuthContext } from '../context/Auth';
 import { useHistory } from 'react-router';
 import Accenture from '../assets/companies/accenture.png';
@@ -53,27 +54,48 @@ const enterprises = [
   },
 ];
 
-const DEFAULT_EMAIL = 'juan@gmail.com';
-const DEFAULT_PASS = '123456';
+// const DEFAULT_EMAIL = 'juan@gmail.com';
+// const DEFAULT_PASS = '123456';
 export default function LoginPage() {
   const { push, goBack, location } = useHistory();
-  const { message, authenticated, login, loading } = useContext(AuthContext);
+  const { message, authenticated, login, loading, getSchedule } = useContext(AuthContext);
   const [account, setAccount] = useState<User>({
     email: '',
     password: '',
     points: 0,
   });
   const { email, password } = account;
+  const [schedule, setSchedule] = useState<Schedule>({ hourFrom: '', hourTo: '', minuteFrom: '', minuteTo: '' });
 
   const handleLogin = () => {
-    if (email === '' || password === '') {
-      login({
-        ...account,
-        email: DEFAULT_EMAIL,
-        password: DEFAULT_PASS,
-      });
-    } else {
+    const currentHour = moment().hours();
+    const currentMinutes = moment().minutes();
+    if (
+      (currentHour >= Number(schedule.hourFrom) &&
+        currentHour <= Number(schedule.hourTo) &&
+        currentMinutes >= Number(schedule.minuteFrom) &&
+        currentMinutes <= Number(schedule.minuteTo)) ||
+      account.email?.toLowerCase().includes('rrhh')
+    ) {
       login(account);
+      // if(moment().minutes())
+      // if (email === '' || password === '') {
+      //   login({
+      //     ...account,
+      //     email: DEFAULT_EMAIL,
+      //     password: DEFAULT_PASS,
+      //   });
+      // } else {
+      // }
+    } else {
+      toast.error('Sistema fuera de horario', {
+        icon: '⚠️',
+        style: {
+          borderRadius: '10px',
+          background: '#f2657a',
+          color: '#fff',
+        },
+      });
     }
   };
 
@@ -102,6 +124,14 @@ export default function LoginPage() {
   }, [message]);
 
   useEffect(() => {
+    const getScheduleAsync = async () => {
+      const response = await getSchedule();
+      if (response && response.schedule) {
+        setSchedule(response.schedule);
+      }
+    };
+
+    getScheduleAsync();
     toast.dismiss();
     // eslint-disable-next-line
   }, []);
@@ -312,6 +342,7 @@ export default function LoginPage() {
                     bg: 'brand.900',
                   }}
                   onClick={() => handleLogin()}
+                  tabIndex={0}
                 >
                   Ingresar
                 </Button>
