@@ -1,4 +1,4 @@
-const location = `${window.location.origin}products/`;
+// const location = `${window.location.origin}products/`;
 export const products: Product[] = [
   {
     name: 'Atornillador 3.6v black & decker',
@@ -9,16 +9,20 @@ export const products: Product[] = [
     points: 204000,
     images: [
       {
-        url: `${location}atornillador/1.jpg`,
+        // url: `${location}atornillador/1.jpg`,
+        url: 'https://i.ibb.co/qLH4r75/1.jpg',
       },
       {
-        url: `${location}atornillador/2.jpg`,
+        // url: `${location}atornillador/2.jpg`,
+        url: 'https://i.ibb.co/g4NX6C4/2.jpg',
       },
       {
-        url: `${location}atornillador/3.jpg`,
+        // url: `${location}atornillador/3.jpg`,
+        url: 'https://i.ibb.co/NZHxgFL/3.jpg',
       },
       {
-        url: `${location}atornillador/4.jpg`,
+        // url: `${location}atornillador/4.jpg`,
+        url: 'https://i.ibb.co/rtdnJRs/4.jpg',
       },
     ],
   },
@@ -31,13 +35,16 @@ export const products: Product[] = [
     points: 204000,
     images: [
       {
-        url: `${location}mochila/1.jpg`,
+        // url: `${location}mochila/1.jpg`,
+        url: 'https://i.ibb.co/34BqD2Z/1.jpg',
       },
       {
-        url: `${location}mochila/1.jpg`,
+        // url: `${location}mochila/1.jpg`,
+        url: 'https://i.ibb.co/5kGc25Q/2.jpg',
       },
       {
-        url: `${location}mochila/1.jpg`,
+        // url: `${location}mochila/1.jpg`,
+        url: 'https://i.ibb.co/ThmTpq9/3.jpg',
       },
     ],
   },
@@ -50,10 +57,12 @@ export const products: Product[] = [
     points: 198000,
     images: [
       {
-        url: `${location}laundry/1.jpg`,
+        // url: `${location}laundry/1.jpg`,
+        url: 'https://i.ibb.co/JRhj24q/1.jpg',
       },
       {
-        url: `${location}laundry/2.jpg`,
+        // url: `${location}laundry/2.jpg`,
+        url: 'https://i.ibb.co/cgd4P2t/2.jpg',
       },
     ],
   },
@@ -66,19 +75,24 @@ export const products: Product[] = [
     points: 959000,
     images: [
       {
-        url: `${location}freidora/1.jpg`,
+        // url: `${location}freidora/1.jpg`,
+        url: 'https://i.ibb.co/jGbFjDk/1.jpg',
       },
       {
-        url: `${location}freidora/2.jpg`,
+        // url: `${location}freidora/2.jpg`,
+        url: 'https://i.ibb.co/ThrqF71/3.jpg',
       },
       {
-        url: `${location}freidora/3.jpg`,
+        // url: `${location}freidora/3.jpg`,
+        url: 'https://i.ibb.co/r7BWMbr/4.jpg',
       },
       {
-        url: `${location}freidora/4.jpg`,
+        // url: `${location}freidora/4.jpg`,
+        url: 'https://i.ibb.co/Sry9qTs/5.jpg',
       },
       {
-        url: `${location}freidora/5.jpg`,
+        // url: `${location}freidora/5.jpg`,
+        url: 'https://i.ibb.co/k567nmQ/6.jpg',
       },
     ],
   },
@@ -91,7 +105,8 @@ export const products: Product[] = [
     points: 923000,
     images: [
       {
-        url: `${location}monitor/1.jpg`,
+        // url: `${location}monitor/1.jpg`,
+        url: 'https://i.ibb.co/c2tzc26/1.jpg',
       },
     ],
   },
@@ -104,10 +119,12 @@ export const products: Product[] = [
     points: 593000,
     images: [
       {
-        url: `${location}horno/1.jpg`,
+        // url: `${location}horno/1.jpg`,
+        url: 'https://i.ibb.co/Ws95xrQ/1.jpg',
       },
       {
-        url: `${location}horno/2.jpg`,
+        // url: `${location}horno/2.jpg`,
+        url: 'https://i.ibb.co/5WN7HGq/2.jpg',
       },
     ],
   },
@@ -120,13 +137,16 @@ export const products: Product[] = [
     points: 537000,
     images: [
       {
-        url: `${location}auricular/1.jpg`,
+        // url: `${location}auricular/1.jpg`,
+        url: 'https://i.ibb.co/zV96Frg/1.jpg',
       },
       {
-        url: `${location}auricular/2.jpg`,
+        // url: `${location}auricular/2.jpg`,
+        url: 'https://i.ibb.co/wR7GYDJ/2.jpg',
       },
       {
-        url: `${location}auricular/3.jpg`,
+        // url: `${location}auricular/3.jpg`,
+        url: 'https://i.ibb.co/FgWcghL/3.jpg',
       },
     ],
   },
@@ -139,7 +159,8 @@ export const products: Product[] = [
     points: 57000,
     images: [
       {
-        url: `${location}mantel/1.jpg`,
+        // url: `${location}mantel/1.jpg`,
+        url: 'https://i.ibb.co/JRTdpYZ/1.jpg',
       },
     ],
   },
@@ -151,7 +172,8 @@ export const products: Product[] = [
     points: 19000,
     images: [
       {
-        url: `${location}mostaza1/1.jpg`,
+        // url: `${location}mostaza1/1.jpg`,
+        url: 'https://i.ibb.co/64W306X/1.jpg',
       },
     ],
   },
@@ -163,7 +185,8 @@ export const products: Product[] = [
     points: 20000,
     images: [
       {
-        url: `${location}mostaza2/1.jpg`,
+        // url: `${location}mostaza2/1.jpg`,
+        url: 'https://i.ibb.co/rQzWdZS/1.jpg',
       },
     ],
   },
@@ -173,13 +196,15 @@ export const products: Product[] = [
       'Diseño sin bordes, menos marco, escenas más amplias. Bases delgadas y refinadas, transmiten liviandad. Pixel Precise Ultra HD, movimiento fluido y profundidad visible. Compatible con HDR10+. Dolby Vision y Dolby Atmos, para imagen y sonido cinematográfico. SAPHI, la forma más inteligente de disfrutar de tu televisor.  Acceso con un solo botón a un menú de íconos sencillos| Bluetooth para que puedas conectar tus dispositivos compatibles. Colección Philips TV: Netflix, Prime Video y mucho más. Sonido nítido de parlantes de rango completo. Graves potentes.',
     stock: 100,
     madeIn: 'Argentina',
-    points: 3683000,
+    points: 333000,
     images: [
       {
-        url: `${location}led/1.jpg`,
+        //   url: `${location}led/1.jpg`,
+        url: 'https://i.ibb.co/DzSfHxJ/1.jpg',
       },
       {
-        url: `${location}led/2.jpg`,
+        // url: `${location}led/2.jpg`,
+        url: 'https://i.ibb.co/tXNKr5x/2.jpg',
       },
     ],
   },
@@ -192,7 +217,8 @@ export const products: Product[] = [
     points: 1847000,
     images: [
       {
-        url: `${location}golf/1.jpg`,
+        // url: `${location}golf/1.jpg`,
+        url: 'https://i.ibb.co/JH5MM2y/1.jpg',
       },
     ],
   },
@@ -202,28 +228,35 @@ export const products: Product[] = [
       '3 deliciosos cafés de grano recién molido, más fácil que nunca. Espuma de leche suave y sedosa gracias al sistema LatteGo de alta velocidad. Ajuste de intensidad del aroma y de la cantidad mediante la opción de "mi elección café". Pantalla táctil, fácil e intuitiva. Niveles de molinillo de 12 pasos para ajustar fácilmente según el gusto. Gracias al sello de aroma se mantienen los granos frescos por más tiempo. Disfrute de tazas del café más fino gracias a los duraderos molinillos de cerámica. Temperatura, aroma y crema perfectos una taza tras otra. Fácil de limpiar gracias al sistema de preparación completamente extraíble. LatteGo con fácil limpieza.. Piezas aptas para lavavajillas y para una mayor comodidad',
     stock: 200,
     madeIn: 'China',
-    points: 3541000,
+    points: 2541000,
     images: [
       {
-        url: `${location}cafetera/1.jpg`,
+        // url: `${location}cafetera/1.jpg`,
+        url: 'https://i.ibb.co/WD3vzcV/1.jpg',
       },
       {
-        url: `${location}cafetera/2.jpg`,
+        // url: `${location}cafetera/2.jpg`,
+        url: 'https://i.ibb.co/LtB6Gf5/2.jpg',
       },
       {
-        url: `${location}cafetera/3.jpg`,
+        // url: `${location}cafetera/3.jpg`,
+        url: 'https://i.ibb.co/4tNPxW3/3.jpg',
       },
       {
-        url: `${location}cafetera/4.jpg`,
+        // url: `${location}cafetera/4.jpg`,
+        url: 'https://i.ibb.co/kcb53KN/4.jpg',
       },
       {
-        url: `${location}cafetera/5.jpg`,
+        // url: `${location}cafetera/5.jpg`,
+        url: 'https://i.ibb.co/FB4xRFx/5.jpg',
       },
       {
-        url: `${location}cafetera/6.jpg`,
+        // url: `${location}cafetera/6.jpg`,
+        url: 'https://i.ibb.co/t83rFNz/6.jpg',
       },
       {
-        url: `${location}cafetera/7.jpg`,
+        // url: `${location}cafetera/7.jpg`,
+        url: 'https://i.ibb.co/8NMTXQH/7.jpg',
       },
     ],
   },
