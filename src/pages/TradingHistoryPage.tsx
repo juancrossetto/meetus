@@ -27,52 +27,54 @@ const TradingHistoryPage: FC<TradingHistoryPageProps> = () => {
     toast.dismiss();
     // eslint-disable-next-line
   }, []);
-
+  console.log('trades', trades);
   return (
     <Layout>
       <Heading mb={5}>Mis Canjes</Heading>
       <Box w="100%" display="flex" flexWrap="wrap" align={'center'} justify={'space-around'}>
-        {trades
-          ? trades.map((trade) => (
-              <VStack
-                key={trade.id}
-                w={'100%'}
-                maxW="370px"
-                minW="370px"
-                rounded={'lg'}
-                boxShadow={'lg'}
-                p={0}
-                m={2}
-                border="1px solid"
-                borderColor="brand.100"
-                transform={'rotate(-3deg)'}
-                transition="1s ease-in-out"
-                _hover={{
-                  cursor: 'pointer',
-                  transform: 'rotate(0deg)',
-                  top: '-10px',
-                }}
-              >
-                <Box id="trade-info" minW="170px" w={'100%'} px={5} pt={2}>
-                  <HStack>
-                    <Text fontWeight="bold" color="#5985eb">
-                      Puntos:
-                    </Text>
-                    <Text>{trade.points}</Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold" color="#5985eb">
-                      Fecha de Pedido:
-                    </Text>{' '}
-                    <Text>{moment(trade.fechaAlta).format('DD/MM/YYYY HH:mm:ss')}</Text>
-                  </HStack>
-                </Box>
-                <Box>
-                  <RewardCard product={trade.product} onClick={() => console.log('p')} />
-                </Box>
-              </VStack>
-            ))
-          : !loading && <Text>No se ha encontrado un historial de canjes</Text>}
+        {trades && trades.length ? (
+          trades.map((trade) => (
+            <VStack
+              key={trade.id}
+              w={'100%'}
+              maxW="370px"
+              minW="370px"
+              rounded={'lg'}
+              boxShadow={'lg'}
+              p={0}
+              m={2}
+              border="1px solid"
+              borderColor="brand.100"
+              transform={'rotate(-3deg)'}
+              transition="1s ease-in-out"
+              _hover={{
+                cursor: 'pointer',
+                transform: 'rotate(0deg)',
+                top: '-10px',
+              }}
+            >
+              <Box id="trade-info" minW="170px" w={'100%'} px={5} pt={2}>
+                <HStack>
+                  <Text fontWeight="bold" color="#5985eb">
+                    Puntos:
+                  </Text>
+                  <Text>{trade.points}</Text>
+                </HStack>
+                <HStack>
+                  <Text fontWeight="bold" color="#5985eb">
+                    Fecha de Pedido:
+                  </Text>{' '}
+                  <Text>{moment(trade.fechaAlta).format('DD/MM/YYYY HH:mm:ss')}</Text>
+                </HStack>
+              </Box>
+              <Box>
+                <RewardCard product={trade.product} onClick={() => console.log('p')} />
+              </Box>
+            </VStack>
+          ))
+        ) : (
+          <Text>No se ha encontrado un historial de canjes</Text>
+        )}
         <Toaster />
         {loading && <Spinner />}
       </Box>

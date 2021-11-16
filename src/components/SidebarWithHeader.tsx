@@ -135,7 +135,7 @@ const SidebarContent = ({ user, onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.filter((l) => ['all', user?.role].includes(l.allowRole)).map((link) => (
-        <NavItem key={link.name} selected={link.url === location.pathname} icon={link.icon} url={link.url}>
+        <NavItem key={link.name} selected={link.url === location.pathname} icon={link.icon} url={link.url} user={user}>
           {link.name}
         </NavItem>
       ))}
@@ -146,12 +146,13 @@ const SidebarContent = ({ user, onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   url: string;
+  user: User | null;
   selected: boolean;
   children: ReactText;
 }
-const NavItem = ({ icon, url, selected, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, url, user, selected, children, ...rest }: NavItemProps) => {
   const { push } = useHistory();
-  const dailyResponse = localStorage.getItem('DAILY_QUESTION_ANSWERED');
+  const dailyResponse = localStorage.getItem(`DAILY_QUESTION_ANSWERED${user ? '_' + user.email : ''}`);
   const isDailyQuestionPage = children === 'Pregunta Diaria';
 
   return (

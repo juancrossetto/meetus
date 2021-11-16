@@ -1,4 +1,4 @@
-const location = `${window.location.href}products/`;
+const location = `${window.location.origin}products/`;
 export const products: Product[] = [
   {
     name: 'Atornillador 3.6v black & decker',

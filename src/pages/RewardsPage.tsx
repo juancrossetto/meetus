@@ -92,7 +92,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
       text,
     };
     sendEmail(email);
-    // updatePoints(product.points * -1);
+    updatePoints(product.points * -1);
     setTimeout(() => {
       toast.success('Canje realizado correctamente, recibira un mail con mas información', { duration: 5000 });
       setLoading(false);

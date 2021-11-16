@@ -13,7 +13,7 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
   const [responses, setResponses] = useState<AnswerDailyQuestion[]>([]);
   const { push } = useHistory();
   const [dailyQuestion, setDailyQuestion] = useState<DailyQuestion>();
-  const { loading, updatePoints, getDailyQuestions } = useContext(AuthContext);
+  const { user, loading, updatePoints, getDailyQuestions } = useContext(AuthContext);
   const handleCheck = (answer: AnswerDailyQuestion) => {
     if (responses?.filter((r) => r.id === answer.id).length) {
       setResponses(responses.filter((r) => r.id !== answer.id));
@@ -40,6 +40,7 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
   }, []);
 
   const handleSendResponse = () => {
+    console.log('userrrrrr', user);
     const incorrectResponses = responses.filter((r) => !r.isCorrect);
     if (incorrectResponses.length) {
       toast('Respuesta incorrecta, volver a intentarlo mañana', {
@@ -50,7 +51,7 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
           color: '#fff',
         },
       });
-      localStorage.setItem('DAILY_QUESTION_ANSWERED', 'incorrect');
+      localStorage.setItem(`DAILY_QUESTION_ANSWERED${user ? '_' + user.email : ''}`, 'incorrect');
     } else {
       updatePoints(dailyQuestion?.points ?? 0);
       toast(`Respuesta Correcta, felicitaciones, sumaste ${dailyQuestion?.points} puntos`, {
@@ -61,7 +62,7 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
           color: '#fff',
         },
       });
-      localStorage.setItem('DAILY_QUESTION_ANSWERED', 'correct');
+      localStorage.setItem(`DAILY_QUESTION_ANSWERED${user ? '_' + user.email : ''}`, 'correct');
     }
     setTimeout(() => {
       push('/');
