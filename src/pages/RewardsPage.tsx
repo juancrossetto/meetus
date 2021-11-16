@@ -62,7 +62,7 @@ const item = {
 
 const RewardsPage: FC<RewardsPageProps> = () => {
   const { push } = useHistory();
-  const { user, loading: ctxLoading, updatePoints, sendEmail } = useContext(AuthContext);
+  const { user, loading: ctxLoading, updatePoints, sendEmail, saveTrade } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
@@ -72,11 +72,10 @@ const RewardsPage: FC<RewardsPageProps> = () => {
   const debouncedFilter = useDebounce(filter);
   const debouncedPoints = useDebounce(points, 200);
 
-  const handleExchange = (product: Product) => {
+  const handleExchange = async (product: Product) => {
     setLoading(true);
-    console.log('product', product);
     const text = `<p style="font-size: 14px;color:black">Estimado/a, Usted ha canjeado un ${product.name} por ${product.points} puntos.</p> <br />
-      <img src="${product.images[0]}" alt="Producto canjeado" width="250" height="250">  <br />
+      <img src="${product.images[0].url}" alt="Producto canjeado" width="250" height="250">  <br />
       <span style="font-size: 11px;;color:black;">
         ${product.description} <br /> 
       <span> 
@@ -85,14 +84,21 @@ const RewardsPage: FC<RewardsPageProps> = () => {
         Esperamos que lo disfrute. <br />
         MeetUs.
       </span>`;
-    console.log('text', text);
     const email: Email = {
       to: user?.email ?? 'juancrossetto@gmail.com',
       subject: 'Canje Meetus',
       text,
     };
-    sendEmail(email);
-    updatePoints(product.points * -1);
+    const today = new Date();
+    const trade: Trade = {
+      points: product.points,
+      fechaAlta: today.toISOString(),
+      product,
+      userId: user && user['_id'] ? user['_id'] : '',
+    };
+    await saveTrade(trade);
+    await updatePoints(product.points * -1);
+    await sendEmail(email);
     setTimeout(() => {
       toast.success('Canje realizado correctamente, recibira un mail con mas información', { duration: 5000 });
       setLoading(false);

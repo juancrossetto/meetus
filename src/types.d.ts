@@ -8,6 +8,16 @@ interface Product {
   offerPoints?: number;
 }
 
+// interface ProductTrade {
+//   name: string;
+//   description: string;
+//   image: string;
+//   madeIn?: string;
+//   stock: number;
+//   points: number;
+//   offerPoints?: number;
+// }
+
 interface ProductImage {
   url: string;
 }
@@ -27,6 +37,7 @@ interface Message {
 }
 
 interface User {
+  _id?: string;
   id?: string;
   name?: string;
   surName?: string;
@@ -74,7 +85,7 @@ interface Email {
 }
 
 interface Trade {
-  id: number;
+  id?: number;
   userId: string;
   product: Product;
   points: number;

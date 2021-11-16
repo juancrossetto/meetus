@@ -8,6 +8,7 @@ import Spinner from '../components/Spinner';
 import './LoginPage.css';
 import Layout from '../components/Layout';
 import RewardCard from '../components/RewardCard';
+import formatNumber from '../utils/formatNumber';
 interface TradingHistoryPageProps {}
 
 const TradingHistoryPage: FC<TradingHistoryPageProps> = () => {
@@ -27,7 +28,6 @@ const TradingHistoryPage: FC<TradingHistoryPageProps> = () => {
     toast.dismiss();
     // eslint-disable-next-line
   }, []);
-  console.log('trades', trades);
   return (
     <Layout>
       <Heading mb={5}>Mis Canjes</Heading>
@@ -58,7 +58,7 @@ const TradingHistoryPage: FC<TradingHistoryPageProps> = () => {
                   <Text fontWeight="bold" color="#5985eb">
                     Puntos:
                   </Text>
-                  <Text>{trade.points}</Text>
+                  <Text>{formatNumber(trade.points.toString())}</Text>
                 </HStack>
                 <HStack>
                   <Text fontWeight="bold" color="#5985eb">

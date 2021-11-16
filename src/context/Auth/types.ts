@@ -15,6 +15,7 @@ export interface AuthContextState {
   sendEmail: (email: Email) => void;
   getDailyQuestions: () => any;
   createDailyQuestion: (dailyQuestion: DailyQuestion) => void;
+  saveTrade: (trade: Trade) => void;
   getHistoryTrades: () => any;
   getSchedule: () => any;
   updateSchedule: (schedule: Schedule) => void;

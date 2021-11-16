@@ -21,6 +21,7 @@ const contextDefaultValues: AuthContextState = {
   sendEmail: () => {},
   createDailyQuestion: () => {},
   getDailyQuestions: () => null,
+  saveTrade: () => null,
   getHistoryTrades: () => null,
   getSchedule: () => null,
   updateSchedule: () => null,
@@ -246,6 +247,22 @@ const AuthProvider: FC = ({ children }) => {
     }
   };
 
+  const saveTrade = async (req: Trade) => {
+    try {
+      setLoading(true);
+      await axiosClient.post('/trade', req);
+      setLoading(false);
+    } catch (error: any) {
+      console.log('Error al guardar intercambio', error);
+      const alert = {
+        msg: 'Error al guardar intercambio',
+        category: 'error',
+      };
+
+      handleError(alert);
+    }
+  };
+
   const getHistoryTrades = async () => {
     try {
       const usr = localStorage.getItem('user');
@@ -334,6 +351,7 @@ const AuthProvider: FC = ({ children }) => {
         sendEmail,
         getDailyQuestions,
         createDailyQuestion,
+        saveTrade,
         getHistoryTrades,
         getSchedule,
         updateSchedule,
