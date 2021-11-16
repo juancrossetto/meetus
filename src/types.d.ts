@@ -87,3 +87,8 @@ interface Schedule {
   minuteFrom: string;
   minuteTo: string;
 }
+
+interface DailyQuestionStorage {
+  email: string;
+  response: string;
+}

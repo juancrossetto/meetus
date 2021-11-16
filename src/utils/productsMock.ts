@@ -1,8 +1,4 @@
-import Atornillador1 from '../assets/products/atornillador/1.jpg';
-import Atornillador2 from '../assets/products/atornillador/2.jpg';
-import Atornillador3 from '../assets/products/atornillador/3.jpg';
-import Atornillador4 from '../assets/products/atornillador/4.jpg';
-
+const location = `${window.location.href}products/`;
 export const products: Product[] = [
   {
     name: 'Atornillador 3.6v black & decker',
@@ -13,16 +9,16 @@ export const products: Product[] = [
     points: 204000,
     images: [
       {
-        url: Atornillador1,
+        url: `${location}atornillador/1.jpg`,
       },
       {
-        url: Atornillador2,
+        url: `${location}atornillador/2.jpg`,
       },
       {
-        url: Atornillador3,
+        url: `${location}atornillador/3.jpg`,
       },
       {
-        url: Atornillador4,
+        url: `${location}atornillador/4.jpg`,
       },
     ],
   },
@@ -35,13 +31,13 @@ export const products: Product[] = [
     points: 204000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_SSC528_1.jpg',
+        url: `${location}mochila/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_SSC528_2.jpg',
+        url: `${location}mochila/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_SSC528_3.jpg',
+        url: `${location}mochila/1.jpg`,
       },
     ],
   },
@@ -54,10 +50,10 @@ export const products: Product[] = [
     points: 198000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_SSC555_1.jpg',
+        url: `${location}laundry/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_SSC555_2.jpg',
+        url: `${location}laundry/2.jpg`,
       },
     ],
   },
@@ -70,19 +66,19 @@ export const products: Product[] = [
     points: 959000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE123_1.jpg',
+        url: `${location}freidora/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE123_2.jpg',
+        url: `${location}freidora/2.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE123_3.jpg',
+        url: `${location}freidora/3.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE123_4.jpg',
+        url: `${location}freidora/4.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE123_5.jpg',
+        url: `${location}freidora/5.jpg`,
       },
     ],
   },
@@ -95,7 +91,7 @@ export const products: Product[] = [
     points: 923000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE087_1.jpg',
+        url: `${location}monitor/1.jpg`,
       },
     ],
   },
@@ -108,13 +104,10 @@ export const products: Product[] = [
     points: 593000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE280_1.jpg',
+        url: `${location}horno/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE280_2.jpg',
-      },
-      {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE280_3.jpg',
+        url: `${location}horno/2.jpg`,
       },
     ],
   },
@@ -127,13 +120,13 @@ export const products: Product[] = [
     points: 537000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE097_1.jpg',
+        url: `${location}auricular/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE097_2.jpg',
+        url: `${location}auricular/2.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE097_3.jpg',
+        url: `${location}auricular/3.jpg`,
       },
     ],
   },
@@ -146,7 +139,7 @@ export const products: Product[] = [
     points: 57000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_OFE055_1.jpg',
+        url: `${location}mantel/1.jpg`,
       },
     ],
   },
@@ -158,7 +151,7 @@ export const products: Product[] = [
     points: 19000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_VIP302_1.jpg',
+        url: `${location}mostaza1/1.jpg`,
       },
     ],
   },
@@ -170,7 +163,7 @@ export const products: Product[] = [
     points: 20000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_VIP301_1.jpg',
+        url: `${location}mostaza2/1.jpg`,
       },
     ],
   },
@@ -183,10 +176,10 @@ export const products: Product[] = [
     points: 3683000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE243_1.jpg',
+        url: `${location}led/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE243_2.jpg',
+        url: `${location}led/2.jpg`,
       },
     ],
   },
@@ -199,7 +192,7 @@ export const products: Product[] = [
     points: 1847000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_GOL042_1.jpg',
+        url: `${location}golf/1.jpg`,
       },
     ],
   },
@@ -212,19 +205,25 @@ export const products: Product[] = [
     points: 3541000,
     images: [
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE316_1.jpg',
+        url: `${location}cafetera/1.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE316_2.jpg',
+        url: `${location}cafetera/2.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE316_3.jpg',
+        url: `${location}cafetera/3.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE316_4.jpg',
+        url: `${location}cafetera/4.jpg`,
       },
       {
-        url: 'https://www2.canjedepuntos.santanderrio.com.ar/fecpcliente/catalogo/stack/SC_ACE316_5.jpg',
+        url: `${location}cafetera/5.jpg`,
+      },
+      {
+        url: `${location}cafetera/6.jpg`,
+      },
+      {
+        url: `${location}cafetera/7.jpg`,
       },
     ],
   },

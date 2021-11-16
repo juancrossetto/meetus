@@ -70,11 +70,11 @@ export default function LoginPage() {
   const handleLogin = () => {
     const currentHour = moment().hours();
     const currentMinutes = moment().minutes();
+    var currentTime = moment(`${currentHour}:${currentMinutes}`, 'hh:mm');
+    var beginningTime = moment(`${schedule.hourFrom}:${schedule.minuteFrom}`, 'hh:mm');
+    var endTime = moment(`${schedule.hourTo}:${schedule.minuteTo}`, 'hh:mm');
     if (
-      (currentHour >= Number(schedule.hourFrom) &&
-        currentHour <= Number(schedule.hourTo) &&
-        currentMinutes >= Number(schedule.minuteFrom) &&
-        currentMinutes <= Number(schedule.minuteTo)) ||
+      (!currentTime.isBefore(beginningTime) &&  !currentTime.isAfter(endTime)) ||
       account.email?.toLowerCase().includes('rrhh')
     ) {
       login(account);

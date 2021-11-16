@@ -74,8 +74,9 @@ const RewardsPage: FC<RewardsPageProps> = () => {
 
   const handleExchange = (product: Product) => {
     setLoading(true);
+    console.log('product', product);
     const text = `<p style="font-size: 14px;color:black">Estimado/a, Usted ha canjeado un ${product.name} por ${product.points} puntos.</p> <br />
-      <img src="https://www.webnode.es/blog/files/2018/07/online-store.png" alt="Producto canjeado" width="250" height="250">  <br />
+      <img src="${product.images[0]}" alt="Producto canjeado" width="250" height="250">  <br />
       <span style="font-size: 11px;;color:black;">
         ${product.description} <br /> 
       <span> 
@@ -91,7 +92,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
       text,
     };
     sendEmail(email);
-    updatePoints(product.points * -1);
+    // updatePoints(product.points * -1);
     setTimeout(() => {
       toast.success('Canje realizado correctamente, recibira un mail con mas información', { duration: 5000 });
       setLoading(false);
@@ -157,7 +158,7 @@ const RewardsPage: FC<RewardsPageProps> = () => {
             Mis Canjes
           </Button>
         </Flex>
-        <motion.div variants={container} initial="hidden" animate="visible">
+        <motion.div variants={container} initial="hidden" animate="visible" id="cards-container" style={{ marginTop: '4rem' }}>
           <Flex flexWrap="wrap" justifyContent="center" id="reward-cards-container" mt={5}>
             {productsFiltered && productsFiltered.length ? (
               productsFiltered.map((product: Product) => (

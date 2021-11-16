@@ -80,8 +80,8 @@ const DailyQuestionPage: FC<DailyQuestionPageProps> = () => {
                 </Text>
               </Stack>
               <VStack padding={6} justifyContent="flex-start" alignItems="flex-start">
-                {dailyQuestion?.answers.map((answer) => (
-                  <VStack key={answer.id} my="1rem!important">
+                {dailyQuestion?.answers.map((answer: AnswerDailyQuestion, index: number) => (
+                  <VStack key={index} my="1rem!important">
                     <Checkbox colorScheme="blue" size="md" onChange={() => handleCheck(answer)}>
                       {answer.answer}
                     </Checkbox>
