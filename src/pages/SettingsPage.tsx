@@ -11,8 +11,7 @@ interface SettingsPageProps {}
 
 const SettingsPage: FC<SettingsPageProps> = () => {
   const { push } = useHistory();
-  const { loading, registerUser, user } = useContext(AuthContext);
-  // const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const { loading, updateUser, user, message } = useContext(AuthContext);
   const [account, setAccount] = useState<User>(
     user || {
       name: '',
@@ -32,9 +31,17 @@ const SettingsPage: FC<SettingsPageProps> = () => {
 
   useEffect(() => {
     toast.dismiss();
+    return () => {
+      toast.dismiss();
+    };
   }, []);
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (message) {
+      toast(message.msg);
+    }
+  }, [message]);
+  const handleSubmit = async () => {
     if (password && password.length < 6) {
       toast('La contraseña debe ser de al menos 6 caracteres', {
         icon: '😔',
@@ -80,17 +87,31 @@ const SettingsPage: FC<SettingsPageProps> = () => {
     //   });
     //   return;
     // }
-    registerUser(account);
-    toast('Datos actualizados correctamente!', {
-      icon: '😃',
-      style: {
-        borderRadius: '10px',
-        background: '#4bb543',
-        color: '#fff',
-      },
-    });
-    localStorage.setItem('user', JSON.stringify(account));
-    push('/');
+    const resp = await updateUser(account);
+    if (resp.status === 200) {
+      toast('Datos actualizados correctamente!', {
+        icon: '😃',
+        style: {
+          borderRadius: '10px',
+          background: '#4bb543',
+          color: '#fff',
+        },
+      });
+      setTimeout(() => {
+        if (resp) {
+          push('/');
+        }
+      }, 1500);
+    } else {
+      toast('Error al actualizar los datos', {
+        icon: '😔',
+        style: {
+          borderRadius: '10px',
+          background: '#f2657a',
+          color: '#fff',
+        },
+      });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

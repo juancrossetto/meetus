@@ -5,6 +5,7 @@ export interface AuthContextState {
   message: Message | null;
   loading: boolean;
   registerUser: (data: User) => void;
+  updateUser: (data: User) => any;
   userAuthenticated: () => void;
   login: (data: User) => void;
   closeSession: () => void;

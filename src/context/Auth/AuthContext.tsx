@@ -11,6 +11,7 @@ const contextDefaultValues: AuthContextState = {
   message: null,
   loading: false,
   registerUser: () => {},
+  updateUser: () => null,
   userAuthenticated: () => {},
   login: () => {},
   closeSession: () => {},
@@ -57,6 +58,28 @@ const AuthProvider: FC = ({ children }) => {
       };
 
       handleError(alert);
+    }
+  };
+
+  const updateUser = async (data: any) => {
+    try {
+      setLoading(true);
+      // setMessage(null);
+      const resp = await axiosClient.put(`/users/${user['_id']}`, data);
+      setLoading(false);
+      if (resp && resp.data) {
+        // setMessage({ msg: `Usuario ${data.name} editado correctamente`, category: 'success' });
+        localStorage.setItem('user', JSON.stringify(resp.data.user));
+        return resp;
+      }
+    } catch (error: any) {
+      const alert = {
+        msg: error.response.data.errores ? error.response.data.errores[0].msg : error.response.data.msg,
+        category: 'error',
+      };
+
+      handleError(alert);
+      setLoading(false);
     }
   };
 
@@ -341,6 +364,7 @@ const AuthProvider: FC = ({ children }) => {
         message,
         loading,
         registerUser,
+        updateUser,
         userAuthenticated,
         login,
         closeSession,

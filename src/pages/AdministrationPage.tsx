@@ -40,22 +40,21 @@ const AdministrationPage: FC<AdministrationPageProps> = () => {
   });
   const [itemsUpdated, setitemsUpdated] = useState<any[]>([]);
 
-
   useEffect(() => {
     setitemsUpdated([...fields]);
   }, [fields]);
 
   const handleIsCorrectChange = (index: number) => {
     let itemsToUpdate = [...itemsUpdated];
-      itemsToUpdate.forEach((itm: any, k:number) => {
-        itm.isCorrect = k === index;
-      });
-      setitemsUpdated(itemsToUpdate);
+    itemsToUpdate.forEach((itm: any, k: number) => {
+      itm.isCorrect = k === index;
+    });
+    setitemsUpdated(itemsToUpdate);
   };
 
   const onSubmit = async (data: any) => {
     let answers = [...data.newAnswer];
-    answers.forEach((itm: any, k:number) => {
+    answers.forEach((itm: any, k: number) => {
       itm.isCorrect = itemsUpdated[k].isCorrect;
     });
     const correctResponses = answers.filter((answer: AnswerDailyQuestion) => answer.isCorrect);
@@ -68,7 +67,7 @@ const AdministrationPage: FC<AdministrationPageProps> = () => {
     } else if (!data || !answers || answers.length <= 0) {
       toast.error('Por favor indique al menos 1 respuesta');
       return;
-    } else if (!correctResponses || correctResponses?.length <= 0 ) {
+    } else if (!correctResponses || correctResponses?.length <= 0) {
       toast.error('Por favor seleccione por lo menos, una respuesta correcta');
       return;
     }
@@ -341,6 +340,7 @@ const AdministrationPage: FC<AdministrationPageProps> = () => {
                             name={`newAnswer.${index}.id`}
                             onChange={() => handleIsCorrectChange(index)}
                             checked={item.isCorrect}
+                            style={{ marginLeft: '1rem', marginRight: '2rem' }}
                           />
                           <IconButton
                             w={'2rem'}
