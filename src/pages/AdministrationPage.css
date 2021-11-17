@@ -59,6 +59,7 @@ li > button {
 }
 
 .create-daily-question-btn {
+  display: flex;
   background: #5985eb;
   color: white;
   border: none;
@@ -67,7 +68,7 @@ li > button {
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
-  width: 12rem;
+  width: 11rem;
   border-radius: 10px;
   position: absolute;
   right: 0;
